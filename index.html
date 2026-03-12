@@ -526,6 +526,55 @@
     font-style: italic;
   }
 
+  /* ─── DRONE AERIAL SHOTS ─── */
+  .drone {
+    padding: 120px 80px;
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+  .drone-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 72px;
+  }
+  .drone-header-text {
+    max-width: 480px;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .drone-features {
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .drone-feature {
+    text-align: center;
+  }
+  .drone-feature-icon {
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .drone-feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .drone-feature-text {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
   /* ─── PROCESS ─── */
   .process {
     padding: 120px 80px;
@@ -618,7 +667,9 @@
     border-right: 2px solid var(--gold);
     pointer-events: none;
   }
-  .founder-content {\n    padding-top: 0;\n  }
+  .founder-content {
+    padding-top: 0;
+  }
   .founder-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(36px, 3.5vw, 52px);
@@ -1109,6 +1160,89 @@
   }
   .footer-copy span { color: var(--gold); }
 
+  /* ─── PAGE LOADER ─── */
+  .page-loader {
+    position: fixed; inset: 0;
+    z-index: 10000;
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  .page-loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .loader-logo-img {
+    width: clamp(220px, 40vw, 380px);
+    opacity: 0;
+    filter: brightness(0);
+    animation: loaderLogoReveal 1.4s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards;
+  }
+  .loader-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .loader-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; bottom: 0;
+    width: 60%;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent);
+    animation: shimmerSlide 1.8s ease 1.2s forwards;
+  }
+  .loader-progress {
+    width: 160px;
+    height: 1px;
+    background: rgba(201,169,110,0.15);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: loaderFadeIn 0.5s ease 1s forwards;
+  }
+  .loader-progress-bar {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 0;
+    background: var(--gold);
+    animation: loaderProgress 1.8s cubic-bezier(0.4,0,0.2,1) 0.8s forwards;
+  }
+  .loader-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: loaderFadeIn 0.6s ease 1.2s forwards;
+  }
+  @keyframes loaderLogoReveal {
+    0%   { opacity: 0; filter: brightness(0); transform: scale(0.92); }
+    50%  { opacity: 1; filter: brightness(1.3); transform: scale(1.02); }
+    100% { opacity: 1; filter: brightness(1); transform: scale(1); }
+  }
+  @keyframes loaderFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes loaderProgress {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+  @keyframes shimmerSlide {
+    from { left: -100%; }
+    to   { left: 200%; }
+  }
+
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
@@ -1201,6 +1335,10 @@
     .process-steps { grid-template-columns: 1fr 1fr; }
     .founder-wrapper { grid-template-columns: 1fr; gap: 48px; }
     .testimonial-cards { grid-template-columns: 1fr; }
+
+    .drone { padding: 80px 32px; }
+    .drone-header { grid-template-columns: 1fr; gap: 24px; }
+    .drone-features { gap: 40px; flex-wrap: wrap; }
 
     .portfolio-masonry { grid-template-columns: 1fr 1fr; }
     .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6 {
@@ -1307,6 +1445,10 @@
     }
     .portfolio-filter { flex-wrap: wrap; gap: 16px; }
 
+    .drone { padding: 60px 24px; }
+    .drone-header { grid-template-columns: 1fr; gap: 20px; }
+    .drone-features { gap: 32px; flex-direction: column; align-items: center; }
+
     .process { padding: 60px 24px; }
     .process-steps { grid-template-columns: 1fr; }
     .step-card { padding: 36px 28px; }
@@ -1343,8 +1485,8 @@
     .cta-content .btn-primary { display: block; width: 100%; text-align: center; }
 
     footer { padding: 48px 24px 32px; }
-    .footer-top { grid-template-columns: 1fr; gap: 40px; }
-    .footer-brand { text-align: center; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-brand { text-align: center; grid-column: 1 / -1; }
     .footer-logo { text-align: center; }
     .footer-tagline { margin: 0 auto 32px; text-align: center; }
     .footer-social { justify-content: center; }
@@ -1357,6 +1499,17 @@
 </style>
 </head>
 <body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-shimmer">
+      <img src="assets/logo.png" alt="Poorvi Photography" class="loader-logo-img">
+    </div>
+    <div class="loader-progress"><div class="loader-progress-bar"></div></div>
+    <div class="loader-text">Loading Experience</div>
+  </div>
+</div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -1561,6 +1714,39 @@
     <div class="p-item p-item-6">
       <img src="https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=1000&q=85" alt="Portfolio 6">
       <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DRONE AERIAL SHOTS -->
+<section class="drone" id="drone">
+  <div class="drone-header">
+    <div>
+      <div class="section-label reveal">Sky Perspective</div>
+      <h2 class="section-title reveal">Drone <em>Aerial</em> Shots</h2>
+    </div>
+    <p class="drone-header-text reveal">Elevate your visual storytelling with breathtaking aerial photography. Our licensed drone pilots capture stunning bird's-eye perspectives of venues, landscapes, and events that ground-level cameras simply cannot achieve.</p>
+  </div>
+  <div class="drone-features">
+    <div class="drone-feature reveal">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">4K Ultra HD</div>
+      <p class="drone-feature-text">Cinema-grade resolution</p>
+    </div>
+    <div class="drone-feature reveal">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">Licensed Pilots</div>
+      <p class="drone-feature-text">FAA certified operators</p>
+    </div>
+    <div class="drone-feature reveal">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">360&deg; Coverage</div>
+      <p class="drone-feature-text">Complete aerial panoramas</p>
+    </div>
+    <div class="drone-feature reveal">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">Cinematic Video</div>
+      <p class="drone-feature-text">Smooth stabilized footage</p>
     </div>
   </div>
 </section>
@@ -1959,6 +2145,12 @@
       ring.style.height = '36px';
       ring.style.opacity = '0.6';
     });
+  });
+
+  // Page loader
+  const loader = document.getElementById('pageLoader');
+  window.addEventListener('load', () => {
+    setTimeout(() => loader.classList.add('loaded'), 2000);
   });
 
   // Sticky nav
