@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POORVI — Photography Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #f5f0ea;
+    --warm-white: #faf8f5;
+    --charcoal: #1a1a18;
+    --dark: #0e0e0c;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --muted: #7a7670;
+    --border: rgba(201,169,110,0.2);
+  }
+
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--dark);
+    color: var(--cream);
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.18s ease, width 0.3s, height 0.3s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+  }
+  body:hover .cursor-ring { opacity: 0.6; }
+  a:hover ~ .cursor-ring, button:hover ~ .cursor-ring { width: 56px; height: 56px; }
+
+  /* SCROLL BAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* TEXT SELECTION */
+  ::selection { background: var(--gold); color: var(--dark); }
+  ::-moz-selection { background: var(--gold); color: var(--dark); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    transition: all 0.5s ease;
+  }
+  nav.scrolled {
+    background: rgba(14,14,12,0.95);
+    backdrop-filter: blur(20px);
+    padding: 18px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 48px; list-style: none; }
+  .nav-links a {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--dark);
+    background: var(--gold);
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 80px 100px;
+    background: linear-gradient(135deg, #0e0e0c 0%, #1a1a18 100%);
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -1px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+  .hero-eyebrow {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 6vw, 92px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-desc {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 400px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 16px 44px;
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.15);
+    transition: left 0.4s;
+  }
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-text {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.6;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 12px;
+    transition: opacity 0.3s;
+  }
+  .btn-text::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--gold);
+    transition: width 0.4s;
+  }
+  .btn-text:hover { opacity: 1; }
+  .btn-text:hover::before { width: 50px; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    animation: slowZoom 8s ease forwards;
+    filter: brightness(0.75) saturate(0.9);
+  }
+  .hero-right-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(14,14,12,0.3), transparent);
+  }
+  .hero-counter {
+    position: absolute; bottom: 60px; right: 60px;
+    text-align: right;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+  .hero-counter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .hero-counter-label {
+    font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    margin-top: 6px;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrapper {
+    background: var(--gold);
+    padding: 14px 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    flex-shrink: 0;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--dark);
+    padding: 0 40px;
+    display: flex; align-items: center; gap: 40px;
+  }
+  .marquee-item::after {
+    content: '◆';
+    font-size: 6px;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+  }
+  .about-images {
+    position: relative;
+    overflow: hidden;
+  }
+  .about-images img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8) saturate(0.85);
+  }
+  .about-images-badge {
+    position: absolute; bottom: 60px; left: 60px;
+    background: var(--gold);
+    padding: 28px 36px;
+  }
+  .badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .badge-text {
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--dark); opacity: 0.7;
+    margin-top: 4px;
+  }
+  .about-content {
+    background: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 80px;
+  }
+  .section-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-body {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+  .stats-row {
+    display: flex; gap: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px; font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ─── SERVICES ─── */
+  .services {
+    padding: 120px 80px;
+    background: var(--dark);
+  }
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: none;
+  }
+  .service-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: brightness(0.6) saturate(0.8);
+  }
+  .service-card:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.5) saturate(0.7);
+  }
+  .service-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,14,12,0.9) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 36px;
+  }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 12px;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 11px;
+    line-height: 1.9;
+    color: var(--muted);
+    font-weight: 300;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+  }
+  .service-card:hover .service-desc {
+    max-height: 100px;
+    opacity: 1;
+  }
+  .service-arrow {
+    margin-top: 20px;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s;
+  }
+  .service-card:hover .service-arrow {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .service-arrow svg { fill: var(--gold); }
+
+  /* ─── PORTFOLIO ─── */
+  .portfolio {
+    padding: 120px 0;
+    background: var(--charcoal);
+  }
+  .portfolio-header {
+    padding: 0 80px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 60px;
+  }
+  .portfolio-filter {
+    display: flex; gap: 28px;
+  }
+  .filter-btn {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--muted);
+    background: none; border: none;
+    cursor: none;
+    padding: 0;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .filter-btn.active, .filter-btn:hover { color: var(--gold); }
+  .filter-btn.active::after, .filter-btn:hover::after { width: 100%; }
+
+  .portfolio-masonry {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 3px;
+    padding: 0 3px;
+  }
+  .p-item { overflow: hidden; position: relative; cursor: none; }
+  .p-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
+    filter: saturate(0.85) brightness(0.9);
+  }
+  .p-item:hover img { transform: scale(1.06); filter: saturate(1.1) brightness(0.85); }
+  .p-item-1 { grid-column: 1 / 6; grid-row: 1; height: 520px; }
+  .p-item-2 { grid-column: 6 / 9; grid-row: 1; height: 520px; }
+  .p-item-3 { grid-column: 9 / 13; grid-row: 1; height: 250px; }
+  .p-item-4 { grid-column: 9 / 13; grid-row: 2; height: 267px; }
+  .p-item-5 { grid-column: 1 / 5; grid-row: 2; height: 380px; }
+  .p-item-6 { grid-column: 5 / 9; grid-row: 2; height: 380px; }
+
+  .p-item-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,14,12,0.7), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex; align-items: flex-end;
+    padding: 28px;
+  }
+  .p-item:hover .p-item-overlay { opacity: 1; }
+  .p-item-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  /* ─── PROCESS ─── */
+  .process {
+    padding: 120px 80px;
+    background: var(--dark);
+  }
+  .process-header { text-align: center; margin-bottom: 80px; }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .step-card {
+    background: var(--charcoal);
+    padding: 52px 40px;
+    border: 1px solid transparent;
+    transition: border-color 0.4s, background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+  .step-card:hover { border-color: var(--border); }
+  .step-card:hover::before { width: 100%; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px; font-weight: 300;
+    color: rgba(201,169,110,0.1);
+    line-height: 1;
+    margin-bottom: 28px;
+    transition: color 0.4s;
+  }
+  .step-card:hover .step-num { color: rgba(201,169,110,0.2); }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+  .step-text {
+    font-size: 12px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── FOUNDER ─── */
+  .founder {
+    padding: 120px 80px;
+    background: var(--charcoal);
+  }
+  .founder-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .founder-photo {
+    position: relative;
+    overflow: hidden;
+    max-width: 520px;
+  }
+  .founder-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    aspect-ratio: 5/5;
+    filter: saturate(0.85) brightness(0.9);
+    transition: transform 0.7s ease;
+  }
+  .founder-photo:hover img {
+    transform: scale(1.03);
+  }
+  .founder-photo-accent {
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 100px; height: 100px;
+    border-top: 2px solid var(--gold);
+    border-left: 2px solid var(--gold);
+    pointer-events: none;
+  }
+  .founder-photo-accent-br {
+    position: absolute;
+    bottom: -16px; right: -16px;
+    width: 100px; height: 100px;
+    border-bottom: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+    pointer-events: none;
+  }
+  .founder-content {\n    padding-top: 0;\n  }
+  .founder-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+  .founder-role {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+  .founder-bio {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .founder-signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-top: 36px;
+  }
+  .founder-stats {
+    display: flex; gap: 40px;
+    padding-top: 36px;
+    margin-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials {
+    padding: 120px 80px;
+    background: var(--dark);
+    text-align: center;
+  }
+  .testimonials-header { margin-bottom: 80px; }
+  .testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .testimonial-card {
+    background: var(--charcoal);
+    padding: 48px 40px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.4s, transform 0.4s;
+    text-align: left;
+  }
+  .testimonial-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px);
+  }
+  .testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: var(--gold);
+    line-height: 0.8;
+    margin-bottom: 20px;
+    opacity: 0.4;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .testimonial-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--dark);
+    flex-shrink: 0;
+  }
+  .testimonial-name {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+  }
+  .testimonial-event {
+    font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* ─── BRANCHES ─── */
+  .branches {
+    padding: 120px 80px;
+    background: var(--charcoal);
+  }
+  .branches-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 72px;
+  }
+  .branches-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .branch-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    border: 1px solid transparent;
+    transition: border-color 0.4s, transform 0.4s;
+  }
+  .branch-card:hover {
+    border-color: var(--border);
+    transform: translateY(-6px);
+  }
+  .branch-image {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+  .branch-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+    filter: brightness(0.7) saturate(0.8);
+  }
+  .branch-card:hover .branch-image img {
+    transform: scale(1.06);
+    filter: brightness(0.6) saturate(0.9);
+  }
+  .branch-info {
+    padding: 32px 28px;
+  }
+  .branch-city {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .branch-address {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .branch-details {
+    display: flex;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .branch-detail-item {
+    flex: 1;
+  }
+  .branch-detail-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .branch-detail-value {
+    font-size: 12px;
+    color: var(--cream);
+    font-weight: 300;
+  }
+  .branch-status {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-top: 20px;
+  }
+  .branch-status.open {
+    color: #5cb85c;
+    border: 1px solid rgba(92,184,92,0.3);
+  }
+  .branch-status.coming {
+    color: var(--gold);
+    border: 1px solid var(--border);
+  }
+
+  /* ─── CONTACT FORM ─── */
+  .contact-form-section {
+    padding: 120px 80px;
+    background: var(--dark);
+  }
+  .contact-form-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-form-info {
+    padding-top: 0;
+  }
+  .contact-form-info .section-body { margin-bottom: 40px; }
+  .contact-info-list { list-style: none; }
+  .contact-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .contact-info-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-group label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--charcoal);
+    border: 1px solid var(--border);
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.6;
+  }
+  .form-group select {
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .form-group select option {
+    background: var(--charcoal);
+    color: var(--cream);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .form-submit {
+    align-self: flex-start;
+    padding: 16px 44px;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-submit:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  /* ─── INSTAGRAM FEED ─── */
+  .instagram-feed {
+    padding: 120px 80px;
+    background: var(--charcoal);
+  }
+  .instagram-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .instagram-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    text-decoration: none;
+    margin-top: 16px;
+    transition: color 0.3s;
+  }
+  .instagram-handle:hover { color: var(--gold); }
+  .instagram-handle svg { flex-shrink: 0; }
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+  }
+  .insta-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .insta-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s;
+    filter: saturate(0.8) brightness(0.9);
+  }
+  .insta-item:hover img {
+    transform: scale(1.08);
+    filter: saturate(1) brightness(0.7);
+  }
+  .insta-item-overlay {
+    position: absolute; inset: 0;
+    background: rgba(14,14,12,0.6);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .insta-item:hover .insta-item-overlay { opacity: 1; }
+  .insta-item-overlay svg {
+    width: 28px; height: 28px;
+    fill: var(--cream);
+    opacity: 0.9;
+  }
+  .instagram-cta {
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  /* ─── CTA BAND ─── */
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cta-band-bg {
+    position: absolute; inset: 0;
+  }
+  .cta-band-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.35) saturate(0.6);
+  }
+  .cta-band-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(14,14,12,0.5), rgba(201,169,110,0.08));
+  }
+  .cta-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 80px 40px;
+    max-width: 700px;
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .cta-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 2;
+    margin-bottom: 48px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #080807;
+    padding: 80px 80px 40px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 64px;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 12px;
+    line-height: 2;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 280px;
+    margin-bottom: 32px;
+  }
+  .footer-social { display: flex; gap: 16px; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.3s;
+  }
+  .social-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,169,110,0.08);
+  }
+  .footer-col-title {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 14px; }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+  .footer-copy span { color: var(--gold); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── HAMBURGER & MOBILE MENU ─── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-size: 28px;
+    cursor: pointer;
+    padding: 4px 8px;
+    z-index: 101;
+    line-height: 1;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(14,14,12,0.97);
+    z-index: 200;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+  .mobile-menu.open {
+    display: flex;
+  }
+  .mobile-menu-close {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-style: italic;
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover {
+    color: var(--gold);
+  }
+
+  /* ─── RESPONSIVE: TABLET + MOBILE shared (max-width: 1023px) ─── */
+  @media (max-width: 1023px) {
+    .nav-toggle { display: block; }
+    nav { padding: 24px 32px; }
+    nav.scrolled { padding: 18px 32px; }
+
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 120px 40px 80px; }
+
+    .about { grid-template-columns: 1fr; }
+    .about-images { min-height: 50vh; }
+    .about-content { padding: 60px 40px; }
+    .services-header { grid-template-columns: 1fr; }
+    .services { padding: 80px 32px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .founder-wrapper { grid-template-columns: 1fr; gap: 48px; }
+    .testimonial-cards { grid-template-columns: 1fr; }
+
+    .portfolio-masonry { grid-template-columns: 1fr 1fr; }
+    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6 {
+      grid-column: auto; grid-row: auto; height: 280px;
+    }
+
+    .contact-form-section { padding: 80px 32px; }
+    .contact-form-wrapper { grid-template-columns: 1fr; gap: 48px; }
+
+    .instagram-feed { padding: 80px 32px; }
+    .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+
+    footer { padding: 60px 32px 32px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  /* ─── RESPONSIVE: MEDIUM (768px – 1023px) ─── */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-size: 9px; letter-spacing: 0.15em; }
+    .nav-cta { display: inline-block; font-size: 9px; padding: 10px 20px; }
+
+    .hero-left { min-height: auto; padding: 120px 40px 60px; }
+    .hero-right { display: block; height: 40vh; }
+    .hero-title { font-size: clamp(48px, 7vw, 68px); }
+
+    .section-title { font-size: clamp(40px, 5vw, 56px); }
+
+    .about-images { min-height: 60vh; }
+    .about-content { padding: 60px 48px; }
+
+    .services { padding: 80px 40px; }
+    .founder { padding: 80px 40px; }
+    .founder-wrapper { gap: 56px; }
+
+    .testimonial-cards { max-width: 640px; margin: 0 auto; }
+
+    .branches { padding: 80px 40px; }
+    .branches-grid { grid-template-columns: 1fr 1fr; }
+
+    .contact-form-section { padding: 80px 40px; }
+    .contact-form-wrapper { grid-template-columns: 1fr; gap: 56px; }
+
+    .instagram-feed { padding: 80px 40px; }
+    .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .cta-band { min-height: 55vh; }
+    .cta-content { padding: 80px 48px; }
+
+    .portfolio-header { padding: 0 40px; }
+
+    footer { padding: 60px 40px 32px; }
+  }
+
+  /* ─── RESPONSIVE: SMALL (max-width: 767px) ─── */
+  @media (max-width: 767px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+
+    .hero-left {
+      min-height: 100vh;
+      padding: 100px 24px 60px;
+    }
+    .hero-right { display: none; }
+    .hero-title { font-size: clamp(40px, 10vw, 56px); }
+    .hero-actions {
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .section-title { font-size: clamp(32px, 8vw, 48px); }
+
+    .marquee-item { font-size: 9px; padding: 0 24px; gap: 24px; }
+
+    .about-images { min-height: 50vw; }
+    .about-images-badge {
+      padding: 20px 24px;
+      bottom: 24px; left: 24px;
+    }
+    .badge-num { font-size: 36px; }
+    .badge-text { font-size: 8px; }
+    .about-content { padding: 48px 24px; }
+    .stats-row { flex-wrap: wrap; gap: 32px; }
+
+    .services { padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { aspect-ratio: 4/3; }
+    .service-desc { max-height: 100px; opacity: 1; }
+    .service-arrow { opacity: 1; transform: translateY(0); }
+
+    .portfolio { padding: 80px 0; }
+    .portfolio-masonry { grid-template-columns: 1fr; }
+    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6 {
+      grid-column: auto; grid-row: auto; height: 260px;
+    }
+    .portfolio-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 0 24px;
+    }
+    .portfolio-filter { flex-wrap: wrap; gap: 16px; }
+
+    .process { padding: 60px 24px; }
+    .process-steps { grid-template-columns: 1fr; }
+    .step-card { padding: 36px 28px; }
+    .step-num { font-size: 60px; }
+
+    .founder { padding: 60px 24px; }
+    .founder-wrapper { grid-template-columns: 1fr; gap: 36px; }
+    .founder-photo-accent,
+    .founder-photo-accent-br { width: 60px; height: 60px; top: -10px; left: -10px; }
+    .founder-photo-accent-br { bottom: -10px; right: -10px; top: auto; left: auto; }
+    .founder-stats { flex-wrap: wrap; gap: 28px; }
+
+    .testimonials { padding: 60px 24px; }
+
+    .branches { padding: 60px 24px; }
+    .branches-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .branches-grid { grid-template-columns: 1fr; }
+
+    .contact-form-section { padding: 60px 24px; }
+    .contact-form-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-submit { width: 100%; }
+
+    .instagram-feed { padding: 60px 24px; }
+    .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .cta-band { min-height: 80vw; }
+    .cta-title { font-size: clamp(32px, 8vw, 48px); }
+    .cta-content { padding: 60px 24px; }
+    .cta-content .btn-primary { display: block; width: 100%; text-align: center; }
+
+    footer { padding: 48px 24px 32px; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .footer-brand { text-align: center; }
+    .footer-logo { text-align: center; }
+    .footer-tagline { margin: 0 auto 32px; text-align: center; }
+    .footer-social { justify-content: center; }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">POO<span>R</span>VI</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a Session</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&#10005;</button>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#team">Team</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Award-Winning Photography Studio</div>
+    <h1 class="hero-title">
+      We capture<br>
+      <em>timeless</em><br>
+      moments
+    </h1>
+    <p class="hero-desc">
+      POORVI is a premier photography studio crafting visual narratives 
+      for brands, weddings, portraits, and editorial campaigns across the globe.
+    </p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="#services" class="btn-text">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=90" alt="Hero portrait">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-counter">
+      <div class="hero-counter-num">840+</div>
+      <div class="hero-counter-label">Sessions delivered</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrapper">
+  <div class="marquee-track">
+    <div class="marquee-item">Wedding Photography</div>
+    <div class="marquee-item">Corporate Portraits</div>
+    <div class="marquee-item">Editorial Campaigns</div>
+    <div class="marquee-item">Brand Identity</div>
+    <div class="marquee-item">Fine Art Prints</div>
+    <div class="marquee-item">Event Coverage</div>
+    <div class="marquee-item">Product Photography</div>
+    <div class="marquee-item">Wedding Photography</div>
+    <div class="marquee-item">Corporate Portraits</div>
+    <div class="marquee-item">Editorial Campaigns</div>
+    <div class="marquee-item">Brand Identity</div>
+    <div class="marquee-item">Fine Art Prints</div>
+    <div class="marquee-item">Event Coverage</div>
+    <div class="marquee-item">Product Photography</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-images">
+    <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=1200&q=90" alt="Studio">
+    <div class="about-images-badge">
+      <div class="badge-num">12+</div>
+      <div class="badge-text">Years of excellence</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-label reveal">Our Story</div>
+    <h2 class="section-title reveal">Light is our<br>language, <em>beauty</em><br>is our vision</h2>
+    <p class="section-body reveal">
+      Founded in 2012, POORVI Photography has become the trusted visual partner 
+      for discerning clients who demand artistry, precision, and authenticity. 
+      Our team of award-winning photographers brings a cinematic sensibility 
+      to every session — whether an intimate bridal portrait or a global brand campaign.
+    </p>
+    <p class="section-body reveal" style="margin-bottom:0;">
+      We believe every frame has the power to stop time. Our craft is built on 
+      deep technical mastery, genuine human connection, and an obsessive 
+      attention to light, composition, and emotion.
+    </p>
+    <div class="stats-row reveal">
+      <div class="stat-item">
+        <div class="stat-num">840+</div>
+        <div class="stat-label">Sessions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">14</div>
+        <div class="stat-label">Awards</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">32</div>
+        <div class="stat-label">Countries</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label reveal">What We Do</div>
+      <h2 class="section-title reveal">Specialized in<br><em>every frame</em></h2>
+    </div>
+    <p class="section-body reveal" style="margin-bottom:0; max-width:400px;">
+      From intimate personal portraits to sweeping corporate campaigns, 
+      we offer a complete suite of photography services tailored to your vision.
+    </p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=85" alt="Wedding">
+      <div class="service-card-overlay">
+        <div class="service-num">01</div>
+        <div class="service-name">Wedding &amp;<br>Couples</div>
+        <div class="service-desc">Eternal love stories told through stunning, authentic imagery that transcends time.</div>
+        <div class="service-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 7h12M7 1l6 6-6 6"/><style>path{stroke:var(--gold);stroke-width:1.5;fill:none;}</style></svg>
+        </div>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=85" alt="Corporate">
+      <div class="service-card-overlay">
+        <div class="service-num">02</div>
+        <div class="service-name">Corporate<br>Portraits</div>
+        <div class="service-desc">Executive headshots and team photography that projects authority and confidence.</div>
+        <div class="service-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 7h12M7 1l6 6-6 6"/><style>path{stroke:var(--gold);stroke-width:1.5;fill:none;}</style></svg>
+        </div>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85" alt="Editorial">
+      <div class="service-card-overlay">
+        <div class="service-num">03</div>
+        <div class="service-name">Editorial &amp;<br>Fashion</div>
+        <div class="service-desc">Bold, conceptual imagery for magazines, lookbooks, and brand campaigns.</div>
+        <div class="service-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 7h12M7 1l6 6-6 6"/><style>path{stroke:var(--gold);stroke-width:1.5;fill:none;}</style></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <div class="section-label">Our Work</div>
+      <h2 class="section-title" style="margin-bottom:0;">Selected <em>Portfolio</em></h2>
+    </div>
+    <div class="portfolio-filter">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">Weddings</button>
+      <button class="filter-btn">Portraits</button>
+      <button class="filter-btn">Editorial</button>
+      <button class="filter-btn">Events</button>
+    </div>
+  </div>
+  <div class="portfolio-masonry">
+    <div class="p-item p-item-1">
+      <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=85" alt="Portfolio 1">
+      <div class="p-item-overlay"><span class="p-item-label">Bridal Portraits</span></div>
+    </div>
+    <div class="p-item p-item-2">
+      <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=800&q=85" alt="Portfolio 2">
+      <div class="p-item-overlay"><span class="p-item-label">Executive Series</span></div>
+    </div>
+    <div class="p-item p-item-3">
+      <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=800&q=85" alt="Portfolio 3">
+      <div class="p-item-overlay"><span class="p-item-label">Nature Editorial</span></div>
+    </div>
+    <div class="p-item p-item-4">
+      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=85" alt="Portfolio 4">
+      <div class="p-item-overlay"><span class="p-item-label">Fashion Week</span></div>
+    </div>
+    <div class="p-item p-item-5">
+      <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1000&q=85" alt="Portfolio 5">
+      <div class="p-item-overlay"><span class="p-item-label">Wedding Day</span></div>
+    </div>
+    <div class="p-item p-item-6">
+      <img src="https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=1000&q=85" alt="Portfolio 6">
+      <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-header">
+    <div class="section-label reveal" style="justify-content:center;">How We Work</div>
+    <h2 class="section-title reveal" style="text-align:center;">Our <em>creative</em> process</h2>
+  </div>
+  <div class="process-steps">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <p class="step-text">We begin with a deep conversation to understand your vision, goals, and the emotions you want to preserve forever.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">02</div>
+      <div class="step-title">Creative Brief</div>
+      <p class="step-text">Our creative directors develop a tailored mood board, shot list, and concept that aligns with your unique aesthetic.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">03</div>
+      <div class="step-title">The Session</div>
+      <p class="step-text">On shoot day we create a relaxed, inspired atmosphere so every frame feels natural, authentic, and effortlessly beautiful.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">04</div>
+      <div class="step-title">Delivery</div>
+      <p class="step-text">Meticulously edited images delivered in a private online gallery within 2–3 weeks, ready to print and share.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder" id="team">
+  <div class="founder-wrapper">
+    <div class="founder-photo reveal">
+      <div class="founder-photo-accent"></div>
+      <img src="assets/founder.jpg" alt="Satheesh Kumar — Founder, POORVI Photography">
+      <div class="founder-photo-accent-br"></div>
+    </div>
+    <div class="founder-content">
+      <div class="section-label reveal">The Founder</div>
+      <h2 class="founder-name reveal">Satheesh Kumar</h2>
+      <div class="founder-role reveal">Founder &amp; Lead Photographer</div>
+      <p class="founder-bio reveal">
+        With a passion for storytelling through light and composition, Satheesh Kumar founded POORVI Photography with a singular vision — to craft images that transcend the ordinary and become timeless keepsakes.
+      </p>
+      <p class="founder-bio reveal">
+        His eye for authentic emotion and cinematic detail has earned the trust of hundreds of clients across weddings, corporate campaigns, and editorial projects. Every frame he captures reflects a deep commitment to artistry, precision, and genuine human connection.
+      </p>
+      <div class="founder-stats reveal">
+        <div class="stat-item">
+          <div class="stat-num">840+</div>
+          <div class="stat-label">Sessions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">14</div>
+          <div class="stat-label">Awards</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12+</div>
+          <div class="stat-label">Years</div>
+        </div>
+      </div>
+      <div class="founder-signature reveal">— Satheesh Kumar</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-header">
+    <div class="section-label reveal" style="justify-content:center;">Client Love</div>
+    <h2 class="section-title reveal">Words from our <em>clients</em></h2>
+  </div>
+  <div class="testimonial-cards">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Every image POORVI delivered felt like a painting. They didn't just photograph our wedding — they told our entire love story in light.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">A</div>
+        <div>
+          <div class="testimonial-name">Amara & Daniel Singh</div>
+          <div class="testimonial-event">Wedding Photography</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Our rebrand needed images that commanded respect. The corporate portrait series POORVI produced elevated our entire visual identity overnight.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">C</div>
+        <div>
+          <div class="testimonial-name">Catherine Moore</div>
+          <div class="testimonial-event">CEO, Axon Capital</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Working with POORVI was effortless and inspiring. They brought a rare vision to our editorial campaign that no one else could have imagined.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">R</div>
+        <div>
+          <div class="testimonial-name">Ravi Krishnamurthy</div>
+          <div class="testimonial-event">Creative Director, Vantage Magazine</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCHES -->
+<section class="branches" id="branches">
+  <div class="branches-header">
+    <div>
+      <div class="section-label reveal">Our Studios</div>
+      <h2 class="section-title reveal" style="margin-bottom:0;">Visit our <em>branches</em></h2>
+    </div>
+    <p class="section-body reveal" style="margin-bottom:0; max-width:400px;">
+      Step into one of our studios and experience the POORVI creative environment firsthand.
+    </p>
+  </div>
+  <div class="branches-grid">
+    <div class="branch-card reveal">
+      <div class="branch-image">
+        <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=85" alt="New York Studio">
+      </div>
+      <div class="branch-info">
+        <div class="branch-city">New York</div>
+        <div class="branch-address">148 W 37th Street, Suite 1200<br>New York, NY 10018</div>
+        <div class="branch-details">
+          <div class="branch-detail-item">
+            <div class="branch-detail-label">Phone</div>
+            <div class="branch-detail-value">+1 (212) 555-0197</div>
+          </div>
+          <div class="branch-detail-item">
+            <div class="branch-detail-label">Hours</div>
+            <div class="branch-detail-value">Mon–Sat, 9AM–7PM</div>
+          </div>
+        </div>
+        <div class="branch-status open">● Now Open</div>
+      </div>
+    </div>
+    <div class="branch-card reveal">
+      <div class="branch-image">
+        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=85" alt="London Studio">
+      </div>
+      <div class="branch-info">
+        <div class="branch-city">London</div>
+        <div class="branch-address">42 Shoreditch High Street<br>London E1 6JJ, UK</div>
+        <div class="branch-details">
+          <div class="branch-detail-item">
+            <div class="branch-detail-label">Phone</div>
+            <div class="branch-detail-value">+44 20 7946 0328</div>
+          </div>
+          <div class="branch-detail-item">
+            <div class="branch-detail-label">Hours</div>
+            <div class="branch-detail-value">Mon–Sat, 10AM–6PM</div>
+          </div>
+        </div>
+        <div class="branch-status open">● Now Open</div>
+      </div>
+    </div>
+    <div class="branch-card reveal">
+      <div class="branch-image">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=85" alt="Mumbai Studio">
+      </div>
+      <div class="branch-info">
+        <div class="branch-city">Mumbai</div>
+        <div class="branch-address">Raghuvanshi Mills, Lower Parel<br>Mumbai 400013, India</div>
+        <div class="branch-details">
+          <div class="branch-detail-item">
+            <div class="branch-detail-label">Phone</div>
+            <div class="branch-detail-value">+91 22 6789 0145</div>
+          </div>
+          <div class="branch-detail-item">
+            <div class="branch-detail-label">Hours</div>
+            <div class="branch-detail-value">Mon–Sat, 10AM–8PM</div>
+          </div>
+        </div>
+        <div class="branch-status coming">◇ Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact-form-section" id="contact">
+  <div class="contact-form-wrapper">
+    <div class="contact-form-info">
+      <div class="section-label reveal">Get In Touch</div>
+      <h2 class="section-title reveal">Let's create<br>something <em>extraordinary</em></h2>
+      <p class="section-body reveal">Every great image begins with a conversation. Tell us your vision and we'll craft a tailored photography experience just for you.</p>
+      <ul class="contact-info-list reveal">
+        <li>
+          <div class="contact-info-icon">&#9993;</div>
+          <div>hello@poorvistudio.com</div>
+        </li>
+        <li>
+          <div class="contact-info-icon">&#9742;</div>
+          <div>+1 (212) 555-0197</div>
+        </li>
+        <li>
+          <div class="contact-info-icon">&#9873;</div>
+          <div>148 W 37th Street, Suite 1200<br>New York, NY 10018</div>
+        </li>
+      </ul>
+    </div>
+    <form class="contact-form reveal" onsubmit="event.preventDefault();">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Full Name</label>
+          <input type="text" id="cf-name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address</label>
+          <input type="email" id="cf-email" placeholder="you@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-type">Session Type</label>
+          <select id="cf-type">
+            <option value="" disabled selected>Select a service</option>
+            <option>Wedding Photography</option>
+            <option>Corporate Portraits</option>
+            <option>Editorial &amp; Fashion</option>
+            <option>Brand Campaign</option>
+            <option>Event Coverage</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cf-date">Preferred Date</label>
+          <input type="date" id="cf-date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Your Message</label>
+        <textarea id="cf-message" placeholder="Tell us about your vision, event details, or any questions you have..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- INSTAGRAM FEED -->
+<section class="instagram-feed">
+  <div class="instagram-header">
+    <div class="section-label reveal" style="justify-content:center;">Follow Along</div>
+    <h2 class="section-title reveal" style="text-align:center;">Our <em>Instagram</em></h2>
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="instagram-handle reveal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      @poorviphotography
+    </a>
+  </div>
+  <div class="instagram-grid">
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Instagram post">
+      <div class="insta-item-overlay">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
+      <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" alt="Instagram post">
+      <div class="insta-item-overlay">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="Instagram post">
+      <div class="insta-item-overlay">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
+      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Instagram post">
+      <div class="insta-item-overlay">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
+      <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=600&q=80" alt="Instagram post">
+      <div class="insta-item-overlay">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
+      <img src="https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=600&q=80" alt="Instagram post">
+      <div class="insta-item-overlay">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+    </a>
+  </div>
+  <div class="instagram-cta reveal">
+    <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="btn-primary">Follow Us on Instagram</a>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-band-bg">
+    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1800&q=85" alt="CTA">
+  </div>
+  <div class="cta-band-overlay"></div>
+  <div class="cta-content">
+    <div class="section-label reveal" style="justify-content:center;">Start Your Journey</div>
+    <h2 class="cta-title reveal">Let's create something<br><em>extraordinary</em></h2>
+    <p class="cta-sub reveal">Every great image begins with a conversation. Tell us your vision and we'll bring it to life.</p>
+    <a href="#contact" class="btn-primary reveal">Book a Session</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">POO<span>R</span>VI</div>
+      <p class="footer-tagline">A premier photography studio crafting visual narratives for brands, weddings, and editorial campaigns since 2012.</p>
+      <div class="footer-social">
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">ig</a>
+        <a href="#" class="social-link">fb</a>
+        <a href="#" class="social-link">pp</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Corporate Portraits</a></li>
+        <li><a href="#">Editorial & Fashion</a></li>
+        <li><a href="#">Brand Campaigns</a></li>
+        <li><a href="#">Event Coverage</a></li>
+        <li><a href="#">Fine Art Prints</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Studio</div>
+      <ul class="footer-links">
+        <li><a href="#">About POORVI</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Press & Awards</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#">hello@poorvistudio.com</a></li>
+        <li><a href="#">+1 (212) 555-0197</a></li>
+        <li><a href="#">148 W 37th Street<br>New York, NY 10018</a></li>
+        <li style="margin-top:20px;"><a href="#">Book a Session →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 <span>POORVI Photography Studio</span>. All rights reserved.</div>
+    <div class="footer-copy">Privacy Policy &nbsp;·&nbsp; Terms of Use</div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor() {
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Hover effects
+  document.querySelectorAll('a, button, .service-card, .p-item, .founder-photo').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+      ring.style.width = '60px';
+      ring.style.height = '60px';
+      ring.style.opacity = '0.3';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.opacity = '0.6';
+    });
+  });
+
+  // Sticky nav
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Portfolio filter (visual only)
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Hamburger mobile menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  navToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+</script>
+</body>
+</html>
