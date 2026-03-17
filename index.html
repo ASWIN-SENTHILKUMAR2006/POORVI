@@ -123,7 +123,7 @@
 
   /* ─── HERO ─── */
   .hero {
-    min-height: 100vh;
+    min-height: clamp(720px, 90vh, 880px);
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -135,7 +135,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 80px 100px;
+    padding: 0 80px 80px;
     background: linear-gradient(135deg, #0e0e0c 0%, #1a1a18 100%);
   }
   .hero-left::after {
@@ -227,6 +227,8 @@
   .hero-right {
     position: relative;
     overflow: hidden;
+    height: 100%;
+    width: 100%;
   }
   .hero-right img {
     width: 100%; height: 100%;
@@ -506,9 +508,11 @@
   .p-item-1 { grid-column: 1 / 6; grid-row: 1; height: 520px; }
   .p-item-2 { grid-column: 6 / 9; grid-row: 1; height: 520px; }
   .p-item-3 { grid-column: 9 / 13; grid-row: 1; height: 250px; }
-  .p-item-4 { grid-column: 9 / 13; grid-row: 2; height: 267px; }
+  .p-item-4 { grid-column: 9 / 13; grid-row: 1; height: 267px; align-self: end; }
   .p-item-5 { grid-column: 1 / 5; grid-row: 2; height: 380px; }
   .p-item-6 { grid-column: 5 / 9; grid-row: 2; height: 380px; }
+  .p-item-7 { grid-column: 9 / 11; grid-row: 2; height: 380px; }
+  .p-item-8 { grid-column: 11 / 13; grid-row: 2; height: 380px; }
 
   .p-item-overlay {
     position: absolute; inset: 0;
@@ -1325,6 +1329,8 @@
     .hero { grid-template-columns: 1fr; }
     .hero-left { padding: 120px 40px 80px; }
 
+    .hero-right { width: 100%; height: 40vh; }
+
     .about { grid-template-columns: 1fr; }
     .about-images { min-height: 50vh; }
     .about-content { padding: 60px 40px; }
@@ -1341,7 +1347,7 @@
     .drone-features { gap: 40px; flex-wrap: wrap; }
 
     .portfolio-masonry { grid-template-columns: 1fr 1fr; }
-    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6 {
+    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 {
       grid-column: auto; grid-row: auto; height: 280px;
     }
 
@@ -1362,7 +1368,7 @@
     .nav-cta { display: inline-block; font-size: 9px; padding: 10px 20px; }
 
     .hero-left { min-height: auto; padding: 120px 40px 60px; }
-    .hero-right { display: block; height: 40vh; }
+    .hero-right { display: block; }
     .hero-title { font-size: clamp(48px, 7vw, 68px); }
 
     .section-title { font-size: clamp(40px, 5vw, 56px); }
@@ -1434,7 +1440,7 @@
 
     .portfolio { padding: 80px 0; }
     .portfolio-masonry { grid-template-columns: 1fr; }
-    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6 {
+    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 {
       grid-column: auto; grid-row: auto; height: 260px;
     }
     .portfolio-header {
@@ -1557,7 +1563,7 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=90" alt="Hero portrait">
+    <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=90" alt="Hero portrait">
     <div class="hero-right-overlay"></div>
     <div class="hero-counter">
       <div class="hero-counter-num">840+</div>
@@ -1640,7 +1646,7 @@
   </div>
   <div class="services-grid reveal">
     <div class="service-card">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=85" alt="Wedding">
+      <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=85" alt="Wedding">
       <div class="service-card-overlay">
         <div class="service-num">01</div>
         <div class="service-name">Wedding &amp;<br>Couples</div>
@@ -1651,7 +1657,7 @@
       </div>
     </div>
     <div class="service-card">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=85" alt="Corporate">
+      <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=800&q=85" alt="Corporate">
       <div class="service-card-overlay">
         <div class="service-num">02</div>
         <div class="service-name">Corporate<br>Portraits</div>
@@ -1662,7 +1668,7 @@
       </div>
     </div>
     <div class="service-card">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85" alt="Editorial">
+      <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=85" alt="Editorial">
       <div class="service-card-overlay">
         <div class="service-num">03</div>
         <div class="service-name">Editorial &amp;<br>Fashion</div>
@@ -1692,28 +1698,36 @@
   </div>
   <div class="portfolio-masonry">
     <div class="p-item p-item-1">
-      <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=85" alt="Portfolio 1">
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&q=85" alt="Portfolio 1">
       <div class="p-item-overlay"><span class="p-item-label">Bridal Portraits</span></div>
     </div>
     <div class="p-item p-item-2">
-      <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=800&q=85" alt="Portfolio 2">
+      <img src="https://images.unsplash.com/photo-1541698444083-023c97d3f4b6?w=800&q=85" alt="Portfolio 2">
       <div class="p-item-overlay"><span class="p-item-label">Executive Series</span></div>
     </div>
     <div class="p-item p-item-3">
-      <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=800&q=85" alt="Portfolio 3">
+      <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=800&q=85" alt="Portfolio 3">
       <div class="p-item-overlay"><span class="p-item-label">Nature Editorial</span></div>
     </div>
     <div class="p-item p-item-4">
-      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=85" alt="Portfolio 4">
+      <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&q=85" alt="Portfolio 4">
       <div class="p-item-overlay"><span class="p-item-label">Fashion Week</span></div>
     </div>
     <div class="p-item p-item-5">
-      <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1000&q=85" alt="Portfolio 5">
+      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1000&q=85" alt="Portfolio 5">
       <div class="p-item-overlay"><span class="p-item-label">Wedding Day</span></div>
     </div>
     <div class="p-item p-item-6">
-      <img src="https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=1000&q=85" alt="Portfolio 6">
+      <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=1000&q=85" alt="Portfolio 6">
       <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
+    </div>
+    <div class="p-item p-item-7">
+      <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=900&q=85" alt="Portfolio 7">
+      <div class="p-item-overlay"><span class="p-item-label">Temple Portraits</span></div>
+    </div>
+    <div class="p-item p-item-8">
+      <img src="https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?w=900&q=85" alt="Portfolio 8">
+      <div class="p-item-overlay"><span class="p-item-label">City Frames</span></div>
     </div>
   </div>
 </section>
@@ -1786,7 +1800,7 @@
   <div class="founder-wrapper">
     <div class="founder-photo reveal">
       <div class="founder-photo-accent"></div>
-      <img src="assets/founder.jpg" alt="Satheesh Kumar — Founder, POORVI Photography">
+      <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=900&q=85" alt="Satheesh Kumar — Founder, POORVI Photography">
       <div class="founder-photo-accent-br"></div>
     </div>
     <div class="founder-content">
@@ -1875,15 +1889,15 @@
   <div class="branches-grid">
     <div class="branch-card reveal">
       <div class="branch-image">
-        <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=85" alt="New York Studio">
+        <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=85" alt="Tamil Nadu Studio">
       </div>
       <div class="branch-info">
-        <div class="branch-city">New York</div>
-        <div class="branch-address">148 W 37th Street, Suite 1200<br>New York, NY 10018</div>
+        <div class="branch-city">Tamil Nadu</div>
+        <div class="branch-address">Nungambakkam High Road, Chennai<br>Tamil Nadu 600034, India</div>
         <div class="branch-details">
           <div class="branch-detail-item">
             <div class="branch-detail-label">Phone</div>
-            <div class="branch-detail-value">+1 (212) 555-0197</div>
+            <div class="branch-detail-value">+91 44 4123 0197</div>
           </div>
           <div class="branch-detail-item">
             <div class="branch-detail-label">Hours</div>
@@ -1895,15 +1909,15 @@
     </div>
     <div class="branch-card reveal">
       <div class="branch-image">
-        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=85" alt="London Studio">
+        <img src="https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?w=800&q=85" alt="Karnataka Studio">
       </div>
       <div class="branch-info">
-        <div class="branch-city">London</div>
-        <div class="branch-address">42 Shoreditch High Street<br>London E1 6JJ, UK</div>
+        <div class="branch-city">Karnataka</div>
+        <div class="branch-address">Indiranagar 100 Feet Road, Bengaluru<br>Karnataka 560038, India</div>
         <div class="branch-details">
           <div class="branch-detail-item">
             <div class="branch-detail-label">Phone</div>
-            <div class="branch-detail-value">+44 20 7946 0328</div>
+            <div class="branch-detail-value">+91 80 4460 0328</div>
           </div>
           <div class="branch-detail-item">
             <div class="branch-detail-label">Hours</div>
@@ -1915,15 +1929,15 @@
     </div>
     <div class="branch-card reveal">
       <div class="branch-image">
-        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=85" alt="Mumbai Studio">
+        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=85" alt="Kerala Studio">
       </div>
       <div class="branch-info">
-        <div class="branch-city">Mumbai</div>
-        <div class="branch-address">Raghuvanshi Mills, Lower Parel<br>Mumbai 400013, India</div>
+        <div class="branch-city">Kerala</div>
+        <div class="branch-address">Marine Drive, Ernakulam, Kochi<br>Kerala 682031, India</div>
         <div class="branch-details">
           <div class="branch-detail-item">
             <div class="branch-detail-label">Phone</div>
-            <div class="branch-detail-value">+91 22 6789 0145</div>
+            <div class="branch-detail-value">+91 484 6789 0145</div>
           </div>
           <div class="branch-detail-item">
             <div class="branch-detail-label">Hours</div>
@@ -2008,37 +2022,37 @@
   </div>
   <div class="instagram-grid">
     <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Instagram post">
+      <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80" alt="Instagram post">
       <div class="insta-item-overlay">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </a>
     <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
-      <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" alt="Instagram post">
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80" alt="Instagram post">
       <div class="insta-item-overlay">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </a>
     <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
-      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="Instagram post">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80" alt="Instagram post">
       <div class="insta-item-overlay">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </a>
     <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
-      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Instagram post">
+      <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&q=80" alt="Instagram post">
       <div class="insta-item-overlay">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </a>
     <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
-      <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=600&q=80" alt="Instagram post">
+      <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=600&q=80" alt="Instagram post">
       <div class="insta-item-overlay">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </a>
     <a href="https://www.instagram.com/poorviphotography/" target="_blank" rel="noopener noreferrer" class="insta-item reveal">
-      <img src="https://images.unsplash.com/photo-1502764613149-7f1d229e230f?w=600&q=80" alt="Instagram post">
+      <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=600&q=80" alt="Instagram post">
       <div class="insta-item-overlay">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
@@ -2052,7 +2066,7 @@
 <!-- CTA BAND -->
 <section class="cta-band">
   <div class="cta-band-bg">
-    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1800&q=85" alt="CTA">
+    <img src="https://images.unsplash.com/photo-1535535112387-56ffe8db21ff?w=1800&q=85" alt="CTA">
   </div>
   <div class="cta-band-overlay"></div>
   <div class="cta-content">
