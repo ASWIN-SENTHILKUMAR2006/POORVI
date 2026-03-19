@@ -513,6 +513,7 @@
   .p-item-6 { grid-column: 5 / 9; grid-row: 2; height: 380px; }
   .p-item-7 { grid-column: 9 / 11; grid-row: 2; height: 380px; }
   .p-item-8 { grid-column: 11 / 13; grid-row: 2; height: 380px; }
+  .m-dup { display: none; }
 
   .p-item-overlay {
     position: absolute; inset: 0;
@@ -1407,10 +1408,10 @@
     nav.scrolled { padding: 14px 24px; }
 
     .hero-left {
-      min-height: 100vh;
-      padding: 100px 24px 60px;
+      min-height: auto;
+      padding: 120px 24px 60px;
     }
-    .hero-right { display: none; }
+    .hero-right { display: block; height: 50vh; width: 100%; }
     .hero-title { font-size: clamp(40px, 10vw, 56px); }
     .hero-actions {
       flex-direction: column;
@@ -1438,18 +1439,33 @@
     .service-desc { max-height: 100px; opacity: 1; }
     .service-arrow { opacity: 1; transform: translateY(0); }
 
-    .portfolio { padding: 80px 0; }
-    .portfolio-masonry { grid-template-columns: 1fr; }
-    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 {
-      grid-column: auto; grid-row: auto; height: 260px;
+    .portfolio { padding: 80px 0; overflow: hidden; }
+    .portfolio-masonry { 
+      display: flex; 
+      gap: 16px; 
+      width: max-content; 
+      animation: portfolioMobileMarquee 30s linear infinite; 
+      padding: 0 24px;
     }
+    .portfolio-masonry:hover, .portfolio-masonry:active {
+      animation-play-state: paused;
+    }
+    .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8, .p-item.m-dup {
+      flex: 0 0 280px; 
+      height: 360px;
+    }
+    .m-dup { display: block; }
     .portfolio-header {
       flex-direction: column;
       align-items: flex-start;
       gap: 24px;
       padding: 0 24px;
     }
-    .portfolio-filter { flex-wrap: wrap; gap: 16px; }
+    .portfolio-filter { flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    @keyframes portfolioMobileMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 8px)); }
+    }
 
     .drone { padding: 60px 24px; }
     .drone-header { grid-template-columns: 1fr; gap: 20px; }
@@ -1698,35 +1714,69 @@
   </div>
   <div class="portfolio-masonry">
     <div class="p-item p-item-1">
-      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&q=85" alt="Portfolio 1">
+      <img src="assets/Gallery/TO WEB/(1).jpg" alt="Portfolio 1">
       <div class="p-item-overlay"><span class="p-item-label">Bridal Portraits</span></div>
     </div>
     <div class="p-item p-item-2">
-      <img src="https://images.unsplash.com/photo-1541698444083-023c97d3f4b6?w=800&q=85" alt="Portfolio 2">
+      <img src="assets/Gallery/TO WEB/(2).jpg" alt="Portfolio 2">
       <div class="p-item-overlay"><span class="p-item-label">Executive Series</span></div>
     </div>
     <div class="p-item p-item-3">
-      <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=800&q=85" alt="Portfolio 3">
+      <img src="assets/Gallery/TO WEB/(3).jpg" alt="Portfolio 3">
       <div class="p-item-overlay"><span class="p-item-label">Nature Editorial</span></div>
     </div>
     <div class="p-item p-item-4">
-      <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&q=85" alt="Portfolio 4">
+      <img src="assets/Gallery/TO WEB/(4).jpg" alt="Portfolio 4">
       <div class="p-item-overlay"><span class="p-item-label">Fashion Week</span></div>
     </div>
     <div class="p-item p-item-5">
-      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1000&q=85" alt="Portfolio 5">
+      <img src="assets/Gallery/TO WEB/(5).jpg" alt="Portfolio 5">
       <div class="p-item-overlay"><span class="p-item-label">Wedding Day</span></div>
     </div>
     <div class="p-item p-item-6">
-      <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=1000&q=85" alt="Portfolio 6">
+      <img src="assets/Gallery/TO WEB/(6).jpg" alt="Portfolio 6">
       <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
     </div>
     <div class="p-item p-item-7">
-      <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=900&q=85" alt="Portfolio 7">
+      <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7">
       <div class="p-item-overlay"><span class="p-item-label">Temple Portraits</span></div>
     </div>
     <div class="p-item p-item-8">
-      <img src="https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?w=900&q=85" alt="Portfolio 8">
+      <img src="assets/Gallery/TO WEB/(8).jpg" alt="Portfolio 8">
+      <div class="p-item-overlay"><span class="p-item-label">City Frames</span></div>
+    </div>
+    
+    <!-- MOBILE MARQUEE DUPLICATES -->
+    <div class="p-item p-item-1 m-dup">
+      <img src="assets/Gallery/TO WEB/(1).jpg" alt="Portfolio 1">
+      <div class="p-item-overlay"><span class="p-item-label">Bridal Portraits</span></div>
+    </div>
+    <div class="p-item p-item-2 m-dup">
+      <img src="assets/Gallery/TO WEB/(2).jpg" alt="Portfolio 2">
+      <div class="p-item-overlay"><span class="p-item-label">Executive Series</span></div>
+    </div>
+    <div class="p-item p-item-3 m-dup">
+      <img src="assets/Gallery/TO WEB/(3).jpg" alt="Portfolio 3">
+      <div class="p-item-overlay"><span class="p-item-label">Nature Editorial</span></div>
+    </div>
+    <div class="p-item p-item-4 m-dup">
+      <img src="assets/Gallery/TO WEB/(4).jpg" alt="Portfolio 4">
+      <div class="p-item-overlay"><span class="p-item-label">Fashion Week</span></div>
+    </div>
+    <div class="p-item p-item-5 m-dup">
+      <img src="assets/Gallery/TO WEB/(5).jpg" alt="Portfolio 5">
+      <div class="p-item-overlay"><span class="p-item-label">Wedding Day</span></div>
+    </div>
+    <div class="p-item p-item-6 m-dup">
+      <img src="assets/Gallery/TO WEB/(6).jpg" alt="Portfolio 6">
+      <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
+    </div>
+    <div class="p-item p-item-7 m-dup">
+      <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7">
+      <div class="p-item-overlay"><span class="p-item-label">Temple Portraits</span></div>
+    </div>
+    <div class="p-item p-item-8 m-dup">
+      <img src="assets/Gallery/TO WEB/(8).jpg" alt="Portfolio 8">
       <div class="p-item-overlay"><span class="p-item-label">City Frames</span></div>
     </div>
   </div>
@@ -1800,7 +1850,7 @@
   <div class="founder-wrapper">
     <div class="founder-photo reveal">
       <div class="founder-photo-accent"></div>
-      <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=900&q=85" alt="Satheesh Kumar — Founder, POORVI Photography">
+      <img src="assets/founder.jpg" alt="Satheesh Kumar — Founder, POORVI Photography">
       <div class="founder-photo-accent-br"></div>
     </div>
     <div class="founder-content">
