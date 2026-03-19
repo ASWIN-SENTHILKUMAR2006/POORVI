@@ -505,15 +505,34 @@
     filter: saturate(0.85) brightness(0.9);
   }
   .p-item:hover img { transform: scale(1.06); filter: saturate(1.1) brightness(0.85); }
-  .p-item-1 { grid-column: 1 / 6; grid-row: 1; height: 520px; }
-  .p-item-2 { grid-column: 6 / 9; grid-row: 1; height: 520px; }
-  .p-item-3 { grid-column: 9 / 13; grid-row: 1; height: 250px; }
-  .p-item-4 { grid-column: 9 / 13; grid-row: 1; height: 267px; align-self: end; }
-  .p-item-5 { grid-column: 1 / 5; grid-row: 2; height: 380px; }
-  .p-item-6 { grid-column: 5 / 9; grid-row: 2; height: 380px; }
+  .p-item-1 { grid-column: 1 / 6; grid-row: 1; height: 720px; }
+  .p-item-2 { grid-column: 6 / 9; grid-row: 1; height: 720px; }
+  .p-item-3 { grid-column: 9 / 13; grid-row: 1; height: 480px; }
+  .p-item-4 { grid-column: 9 / 13; grid-row: 1; height: 380px; align-self: end; }
+  .p-item-5 { grid-column: 1 / 5; grid-row: 2; 
+    height: 380px; 
+ 
+  }
+  .p-item-6 { grid-column: 5 / 9; grid-row: 2;
+     height: 380px;
+  
+     }
   .p-item-7 { grid-column: 9 / 11; grid-row: 2; height: 380px; }
   .p-item-8 { grid-column: 11 / 13; grid-row: 2; height: 380px; }
   .m-dup { display: none; }
+
+     /* Target the image INSIDE item 5 */
+    .p-item-5 img {
+      object-position: center 20%; /* Lower values (0-20%) show the head */
+    }
+
+    /* Target the image INSIDE item 6 */
+    .p-item-6 img {
+      object-position: center 15%; 
+    }
+
+
+
 
   .p-item-overlay {
     position: absolute; inset: 0;
@@ -533,7 +552,7 @@
 
   /* ─── DRONE AERIAL SHOTS ─── */
   .drone {
-    padding: 120px 80px;
+    padding: 140px 80px;
     background: var(--charcoal);
     overflow: hidden;
   }
@@ -542,42 +561,53 @@
     grid-template-columns: 1fr 1fr;
     align-items: end;
     gap: 40px;
-    margin-bottom: 72px;
+    margin-bottom: 88px;
   }
   .drone-header-text {
-    max-width: 480px;
-    font-size: 13px;
+    max-width: 560px;
+    font-size: 14px;
     line-height: 2;
     color: var(--muted);
     font-weight: 300;
   }
   .drone-features {
-    display: flex;
-    justify-content: center;
-    gap: 64px;
-    margin-top: 64px;
-    padding-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 72px;
+    padding-top: 56px;
     border-top: 1px solid var(--border);
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .drone-feature {
-    text-align: center;
+    text-align: left;
+    padding: 26px 22px;
+    border: 1px solid var(--border);
+    background: rgba(14,14,12,0.28);
+    min-height: 168px;
+  }
+  .drone-feature.d-dup {
+    display: none;
   }
   .drone-feature-icon {
-    font-size: 28px;
+    font-size: 30px;
     color: var(--gold);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
   .drone-feature-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 400;
+    font-size: 25px; font-weight: 400;
     color: var(--cream);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .drone-feature-text {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
     font-weight: 300;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
+    line-height: 1.8;
   }
 
   /* ─── PROCESS ─── */
@@ -713,22 +743,36 @@
 
   /* ─── TESTIMONIALS ─── */
   .testimonials {
-    padding: 120px 80px;
+    padding: 140px 80px;
     background: var(--dark);
     text-align: center;
   }
-  .testimonials-header { margin-bottom: 80px; }
+  .testimonials-header {
+    margin-bottom: 88px;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .testimonial-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1320px;
+    margin: 0 auto;
   }
   .testimonial-card {
     background: var(--charcoal);
-    padding: 48px 40px;
+    padding: 52px 42px;
     border-bottom: 2px solid transparent;
     transition: border-color 0.4s, transform 0.4s;
     text-align: left;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .testimonial-card.t-dup {
+    display: none;
   }
   .testimonial-card:hover {
     border-color: var(--gold);
@@ -744,7 +788,7 @@
   }
   .testimonial-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    font-size: clamp(21px, 1.35vw, 24px);
     font-style: italic;
     font-weight: 300;
     line-height: 1.7;
@@ -1341,11 +1385,19 @@
 
     .process-steps { grid-template-columns: 1fr 1fr; }
     .founder-wrapper { grid-template-columns: 1fr; gap: 48px; }
-    .testimonial-cards { grid-template-columns: 1fr; }
+    .testimonial-cards {
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
 
-    .drone { padding: 80px 32px; }
+    .drone { padding: 90px 32px; }
     .drone-header { grid-template-columns: 1fr; gap: 24px; }
-    .drone-features { gap: 40px; flex-wrap: wrap; }
+    .drone-features {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+      padding-top: 36px;
+    }
 
     .portfolio-masonry { grid-template-columns: 1fr 1fr; }
     .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 {
@@ -1467,9 +1519,39 @@
       100% { transform: translateX(calc(-50% - 8px)); }
     }
 
-    .drone { padding: 60px 24px; }
-    .drone-header { grid-template-columns: 1fr; gap: 20px; }
-    .drone-features { gap: 32px; flex-direction: column; align-items: center; }
+    .drone { padding: 60px 0; }
+    .drone-header {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 24px;
+    }
+    .drone-features {
+      display: flex;
+      flex-wrap: nowrap;
+      width: max-content;
+      gap: 16px;
+      margin-top: 40px;
+      padding: 28px 24px 0;
+      animation: droneMobileMarquee 24s linear infinite;
+    }
+    .drone-features:hover,
+    .drone-features:active {
+      animation-play-state: paused;
+    }
+    .drone-feature {
+      flex: 0 0 220px;
+      text-align: left;
+      padding: 18px 16px;
+      border: 1px solid var(--border);
+      background: rgba(14,14,12,0.35);
+    }
+    .drone-feature.d-dup {
+      display: block;
+    }
+    @keyframes droneMobileMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 8px)); }
+    }
 
     .process { padding: 60px 24px; }
     .process-steps { grid-template-columns: 1fr; }
@@ -1483,7 +1565,42 @@
     .founder-photo-accent-br { bottom: -10px; right: -10px; top: auto; left: auto; }
     .founder-stats { flex-wrap: wrap; gap: 28px; }
 
-    .testimonials { padding: 60px 24px; }
+    .testimonials {
+      padding: 60px 0;
+      overflow: hidden;
+    }
+    .testimonials-header {
+      padding: 0 24px;
+      margin-bottom: 48px;
+    }
+    .testimonial-cards {
+      display: flex;
+      flex-wrap: nowrap;
+      width: max-content;
+      gap: 16px;
+      padding: 0 24px;
+      animation: testimonialMobileMarquee 26s linear infinite;
+    }
+    .testimonial-cards:hover,
+    .testimonial-cards:active {
+      animation-play-state: paused;
+    }
+    .testimonial-card {
+      flex: 0 0 300px;
+      min-height: 340px;
+      padding: 34px 26px;
+    }
+    .testimonial-card.t-dup {
+      display: flex;
+    }
+    .testimonial-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    @keyframes testimonialMobileMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 8px)); }
+    }
 
     .branches { padding: 60px 24px; }
     .branches-header {
@@ -1714,36 +1831,39 @@
   </div>
   <div class="portfolio-masonry">
     <div class="p-item p-item-1">
+       <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7">
+      <div class="p-item-overlay"><span class="p-item-label">Temple Portraits</span></div>
+      
+      
+    </div>
+    <div class="p-item p-item-2">
       <img src="assets/Gallery/TO WEB/(1).webp" alt="Portfolio 1">
       <div class="p-item-overlay"><span class="p-item-label">Bridal Portraits</span></div>
     </div>
-    <div class="p-item p-item-2">
-      <img src="assets/Gallery/TO WEB/(2).webp" alt="Portfolio 2">
-      <div class="p-item-overlay"><span class="p-item-label">Executive Series</span></div>
-    </div>
     <div class="p-item p-item-3">
-      <img src="assets/Gallery/TO WEB/(3).webp" alt="Portfolio 3">
+      <img src="assets/Gallery/TO WEB/(4).webp" alt="Portfolio 4">
       <div class="p-item-overlay"><span class="p-item-label">Nature Editorial</span></div>
+     
     </div>
     <div class="p-item p-item-4">
-      <img src="assets/Gallery/TO WEB/(4).webp" alt="Portfolio 4">
+       <img src="assets/Gallery/TO WEB/(3).webp" alt="Portfolio 3">
       <div class="p-item-overlay"><span class="p-item-label">Fashion Week</span></div>
     </div>
     <div class="p-item p-item-5">
       <img src="assets/Gallery/TO WEB/(5).webp" alt="Portfolio 5">
-      <div class="p-item-overlay"><span class="p-item-label">Wedding Day</span></div>
+      <div class="p-item-overlay"><span class="p-item-label">City Frames</span></div>
     </div>
     <div class="p-item p-item-6">
       <img src="assets/Gallery/TO WEB/(6).webp" alt="Portfolio 6">
-      <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
+      <div class="p-item-overlay"><span class="p-item-label">Siblings Shoots</span></div>
     </div>
     <div class="p-item p-item-7">
-      <img src="assets/Gallery/TO WEB/(7).webp" alt="Portfolio 7">
-      <div class="p-item-overlay"><span class="p-item-label">Temple Portraits</span></div>
+     <img src="assets/Gallery/TO WEB/(2).webp" alt="Portfolio 2">
+      <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
     </div>
     <div class="p-item p-item-8">
       <img src="assets/Gallery/TO WEB/(8).webp" alt="Portfolio 8">
-      <div class="p-item-overlay"><span class="p-item-label">City Frames</span></div>
+      <div class="p-item-overlay"><span class="p-item-label">Wedding Day</span></div>
     </div>
     
     <!-- MOBILE MARQUEE DUPLICATES -->
@@ -1772,7 +1892,7 @@
       <div class="p-item-overlay"><span class="p-item-label">Couple Session</span></div>
     </div>
     <div class="p-item p-item-7 m-dup">
-      <img src="assets/Gallery/TO WEB/(7).webp" alt="Portfolio 7">
+      <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7">
       <div class="p-item-overlay"><span class="p-item-label">Temple Portraits</span></div>
     </div>
     <div class="p-item p-item-8 m-dup">
@@ -1808,6 +1928,26 @@
       <p class="drone-feature-text">Complete aerial panoramas</p>
     </div>
     <div class="drone-feature reveal">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">Cinematic Video</div>
+      <p class="drone-feature-text">Smooth stabilized footage</p>
+    </div>
+    <div class="drone-feature d-dup" aria-hidden="true">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">4K Ultra HD</div>
+      <p class="drone-feature-text">Cinema-grade resolution</p>
+    </div>
+    <div class="drone-feature d-dup" aria-hidden="true">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">Licensed Pilots</div>
+      <p class="drone-feature-text">FAA certified operators</p>
+    </div>
+    <div class="drone-feature d-dup" aria-hidden="true">
+      <div class="drone-feature-icon">&#9670;</div>
+      <div class="drone-feature-title">360&deg; Coverage</div>
+      <p class="drone-feature-text">Complete aerial panoramas</p>
+    </div>
+    <div class="drone-feature d-dup" aria-hidden="true">
       <div class="drone-feature-icon">&#9670;</div>
       <div class="drone-feature-title">Cinematic Video</div>
       <p class="drone-feature-text">Smooth stabilized footage</p>
@@ -1912,6 +2052,39 @@
       </div>
     </div>
     <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Working with POORVI was effortless and inspiring. They brought a rare vision to our editorial campaign that no one else could have imagined.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">R</div>
+        <div>
+          <div class="testimonial-name">Ravi Krishnamurthy</div>
+          <div class="testimonial-event">Creative Director, Vantage Magazine</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card t-dup" aria-hidden="true">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Every image POORVI delivered felt like a painting. They didn't just photograph our wedding — they told our entire love story in light.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">A</div>
+        <div>
+          <div class="testimonial-name">Amara & Daniel Singh</div>
+          <div class="testimonial-event">Wedding Photography</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card t-dup" aria-hidden="true">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Our rebrand needed images that commanded respect. The corporate portrait series POORVI produced elevated our entire visual identity overnight.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">C</div>
+        <div>
+          <div class="testimonial-name">Catherine Moore</div>
+          <div class="testimonial-event">CEO, Axon Capital</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card t-dup" aria-hidden="true">
       <div class="testimonial-quote">"</div>
       <p class="testimonial-text">Working with POORVI was effortless and inspiring. They brought a rare vision to our editorial campaign that no one else could have imagined.</p>
       <div class="testimonial-author">
