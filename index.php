@@ -3478,6 +3478,9 @@
       <div class="footer-bottom">
         <div class="footer-copy">
           © 2025 <span>POORVI Photography Studio</span>. All rights reserved.
+          
+          Designed and Developed by
+          <a href="https://triospark.in" target="_blank" rel="noopener noreferrer">Trio's Park Solutions</a>
         </div>
         <div class="footer-copy">
           <a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
