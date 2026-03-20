@@ -789,14 +789,26 @@
     padding: 120px 80px;
     background: var(--dark);
     text-align: center;
+    overflow: hidden;
   }
   .testimonials-header { margin-bottom: 80px; }
+  .testimonial-marquee {
+    overflow: hidden;
+  }
   .testimonial-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: testimonialMarquee 46s linear infinite;
+    will-change: transform;
+  }
+  .testimonial-marquee:hover .testimonial-cards,
+  .testimonial-marquee:active .testimonial-cards {
+    animation-play-state: paused;
   }
   .testimonial-card {
+    flex: 0 0 360px;
+    max-width: 360px;
     background: var(--charcoal);
     padding: 48px 40px;
     border-bottom: 2px solid transparent;
@@ -847,6 +859,10 @@
     text-transform: uppercase;
     color: var(--muted);
     margin-top: 3px;
+  }
+  @keyframes testimonialMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   /* ─── BRANCHES ─── */
@@ -1414,7 +1430,7 @@
 
     .process-steps { grid-template-columns: 1fr 1fr; }
     .founder-wrapper { grid-template-columns: 1fr; gap: 48px; }
-    .testimonial-cards { grid-template-columns: 1fr; }
+    .testimonial-card { flex-basis: 320px; max-width: 320px; }
 
     .drone { padding: 80px 32px; }
     .drone-header { grid-template-columns: 1fr; gap: 24px; }
@@ -1454,7 +1470,7 @@
     .founder { padding: 80px 40px; }
     .founder-wrapper { gap: 56px; }
 
-    .testimonial-cards { max-width: 640px; margin: 0 auto; }
+    .testimonial-card { flex-basis: 340px; max-width: 340px; }
 
     .branches { padding: 80px 40px; }
     .branches-grid { grid-template-columns: 1fr 1fr; }
@@ -1557,6 +1573,9 @@
     .founder-stats { flex-wrap: wrap; gap: 28px; }
 
     .testimonials { padding: 60px 24px; }
+    .testimonial-cards { gap: 16px; }
+    .testimonial-card { flex-basis: 280px; max-width: 280px; padding: 34px 26px; }
+    .testimonial-text { font-size: 18px; line-height: 1.65; }
 
     .branches { padding: 60px 24px; }
     .branches-header {
@@ -1961,40 +1980,75 @@
     <div class="section-label reveal" style="justify-content:center;">Client Love</div>
     <h2 class="section-title reveal">Words from our <em>clients</em></h2>
   </div>
-  <div class="testimonial-cards">
+  <div class="testimonial-marquee">
+  <div class="testimonial-cards" id="testimonialCards">
     <div class="testimonial-card reveal">
       <div class="testimonial-quote">"</div>
-      <p class="testimonial-text">Every image POORVI delivered felt like a painting. They didn't just photograph our wedding — they told our entire love story in light.</p>
+      <p class="testimonial-text">Perfect photographer for all our events. Every output was clean, emotional, and beautifully edited. Highly recommended.</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar">A</div>
+        <div class="testimonial-avatar">N</div>
         <div>
-          <div class="testimonial-name">Amara & Daniel Singh</div>
+          <div class="testimonial-name">Naveen S</div>
+          <div class="testimonial-event">Event Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Super work in photographs and videos with great response and approach. The team was patient, professional, and very supportive.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">த</div>
+        <div>
+          <div class="testimonial-name">தங்கவேல் சுப்ரமணியம்</div>
+          <div class="testimonial-event">Local Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Nice, calm person and excellent service. The shoot experience was comfortable and the final photos were delivered on time.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">K</div>
+        <div>
+          <div class="testimonial-name">Karthik</div>
+          <div class="testimonial-event">Wedding & Outdoor Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Best photographer for wedding and outdoor sessions. Great quality, clear communication, and very professional execution.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">S</div>
+        <div>
+          <div class="testimonial-name">Shankar Guna</div>
           <div class="testimonial-event">Wedding Photography</div>
         </div>
       </div>
     </div>
     <div class="testimonial-card reveal">
       <div class="testimonial-quote">"</div>
-      <p class="testimonial-text">Our rebrand needed images that commanded respect. The corporate portrait series POORVI produced elevated our entire visual identity overnight.</p>
+      <p class="testimonial-text">All-time fabulous work. Creative angles, beautiful color tones, and a friendly team that makes every moment easy in front of the camera.</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar">C</div>
+        <div class="testimonial-avatar">L</div>
         <div>
-          <div class="testimonial-name">Catherine Moore</div>
-          <div class="testimonial-event">CEO, Axon Capital</div>
+          <div class="testimonial-name">LAKSH HANS</div>
+          <div class="testimonial-event">Portrait Client</div>
         </div>
       </div>
     </div>
     <div class="testimonial-card reveal">
       <div class="testimonial-quote">"</div>
-      <p class="testimonial-text">Working with POORVI was effortless and inspiring. They brought a rare vision to our editorial campaign that no one else could have imagined.</p>
+      <p class="testimonial-text">Excellent responsiveness, quality, professionalism, and value. The team understood our expectations and delivered beyond them.</p>
       <div class="testimonial-author">
-        <div class="testimonial-avatar">R</div>
+        <div class="testimonial-avatar">J</div>
         <div>
-          <div class="testimonial-name">Ravi Krishnamurthy</div>
-          <div class="testimonial-event">Creative Director, Vantage Magazine</div>
+          <div class="testimonial-name">Judo Mani</div>
+          <div class="testimonial-event">Verified Client</div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -2012,15 +2066,15 @@
   <div class="branches-grid">
     <div class="branch-card reveal">
       <div class="branch-image">
-        <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=85" alt="Tamil Nadu Studio">
+        <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=85" alt="Keerambur Studio">
       </div>
       <div class="branch-info">
-        <div class="branch-city">Tamil Nadu</div>
-        <div class="branch-address">Nungambakkam High Road, Chennai<br>Tamil Nadu 600034, India</div>
+        <div class="branch-city">Keerambur</div>
+        <div class="branch-address">Ettukaiamman Complex, Keerambur<br>Tamil Nadu 637207, India</div>
         <div class="branch-details">
           <div class="branch-detail-item">
             <div class="branch-detail-label">Phone</div>
-            <div class="branch-detail-value">+91 44 4123 0197</div>
+            <div class="branch-detail-value">081224 48813</div>
           </div>
           <div class="branch-detail-item">
             <div class="branch-detail-label">Hours</div>
@@ -2032,15 +2086,15 @@
     </div>
     <div class="branch-card reveal">
       <div class="branch-image">
-        <img src="https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?w=800&q=85" alt="Karnataka Studio">
+        <img src="https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?w=800&q=85" alt="Namakkal Town Studio">
       </div>
       <div class="branch-info">
-        <div class="branch-city">Karnataka</div>
-        <div class="branch-address">Indiranagar 100 Feet Road, Bengaluru<br>Karnataka 560038, India</div>
+        <div class="branch-city">Namakkal Town</div>
+        <div class="branch-address">Namakkal Town, Namakkal<br>Tamil Nadu 637001, India</div>
         <div class="branch-details">
           <div class="branch-detail-item">
             <div class="branch-detail-label">Phone</div>
-            <div class="branch-detail-value">+91 80 4460 0328</div>
+            <div class="branch-detail-value">081224 48813</div>
           </div>
           <div class="branch-detail-item">
             <div class="branch-detail-label">Hours</div>
@@ -2048,26 +2102,6 @@
           </div>
         </div>
         <div class="branch-status open">● Now Open</div>
-      </div>
-    </div>
-    <div class="branch-card reveal">
-      <div class="branch-image">
-        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=85" alt="Kerala Studio">
-      </div>
-      <div class="branch-info">
-        <div class="branch-city">Kerala</div>
-        <div class="branch-address">Marine Drive, Ernakulam, Kochi<br>Kerala 682031, India</div>
-        <div class="branch-details">
-          <div class="branch-detail-item">
-            <div class="branch-detail-label">Phone</div>
-            <div class="branch-detail-value">+91 484 6789 0145</div>
-          </div>
-          <div class="branch-detail-item">
-            <div class="branch-detail-label">Hours</div>
-            <div class="branch-detail-value">Mon–Sat, 10AM–8PM</div>
-          </div>
-        </div>
-        <div class="branch-status coming">◇ Coming Soon</div>
       </div>
     </div>
   </div>
@@ -2316,6 +2350,19 @@
       this.classList.add('active');
     });
   });
+
+  // Testimonial marquee loop (duplicate once for seamless scrolling)
+  const testimonialCards = document.getElementById('testimonialCards');
+  if (testimonialCards && !testimonialCards.dataset.cloned) {
+    const originals = Array.from(testimonialCards.children);
+    originals.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.remove('reveal');
+      clone.classList.add('visible');
+      testimonialCards.appendChild(clone);
+    });
+    testimonialCards.dataset.cloned = 'true';
+  }
 
   // Hamburger mobile menu
   const navToggle = document.getElementById('navToggle');
