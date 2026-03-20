@@ -2661,7 +2661,7 @@
       </div>
       <div class="portfolio-masonry">
         <div class="p-item p-item-1">
-          <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7" loading="lazy" decoding="async" />
+          <img src="assets/Gallery/TO WEB/(7).webp" alt="Portfolio 7" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Temple Portraits</span>
           </div>
