@@ -73,7 +73,7 @@ try {
     $mail->Port = 587;
 
     $mail->setFrom('triospark.in@gmail.com', 'Poorvi Photography Website');
-    $mail->addAddress('msarunsanjeev@gmail.com');
+    $mail->addAddress('poorviphotography@gmail.com');
     $mail->addReplyTo($email, $name);
 
     $mail->isHTML(true); 
