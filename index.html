@@ -4,6 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>POORVI — Photography Studio</title>
+    <meta
+      name="description"
+      content="POORVI Photography Studio captures timeless wedding, portrait, corporate, editorial, and event moments in Namakkal and Keerambur, Tamil Nadu."
+    />
+    <meta
+      name="keywords"
+      content="Poorvi Photography, wedding photographer Namakkal, portrait photographer Keerambur, corporate photography Tamil Nadu, event photography Namakkal"
+    />
+    <meta name="author" content="POORVI Photography Studio" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="theme-color" content="#0e0e0c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="POORVI Photography Studio" />
+    <meta property="og:title" content="POORVI — Photography Studio" />
+    <meta
+      property="og:description"
+      content="Timeless wedding, portrait, and commercial photography by POORVI in Namakkal and Keerambur."
+    />
+    <meta property="og:url" content="https://poorvi.triospark.in/" />
+    <meta property="og:image" content="https://poorvi.triospark.in/assets/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="POORVI — Photography Studio" />
+    <meta
+      name="twitter:description"
+      content="Book POORVI Photography Studio for wedding, portrait, and event photography in Tamil Nadu."
+    />
+    <meta name="twitter:image" content="https://poorvi.triospark.in/assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -966,6 +996,7 @@
         padding: 140px 80px;
         background: var(--dark);
         text-align: center;
+        overflow: hidden;
       }
       .testimonials-header {
         margin-bottom: 88px;
@@ -973,14 +1004,24 @@
         margin-left: auto;
         margin-right: auto;
       }
+      .testimonial-marquee {
+        overflow: hidden;
+      }
       .testimonial-cards {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(280px, 1fr));
+        display: flex;
+        width: max-content;
         gap: 24px;
-        max-width: 1320px;
-        margin: 0 auto;
+        padding: 0 8px;
+        animation: testimonialMarquee 42s linear infinite;
+        will-change: transform;
+      }
+      .testimonial-marquee:hover .testimonial-cards,
+      .testimonial-marquee:active .testimonial-cards {
+        animation-play-state: paused;
       }
       .testimonial-card {
+        flex: 0 0 360px;
+        max-width: 360px;
         background: var(--charcoal);
         padding: 52px 42px;
         border-bottom: 2px solid transparent;
@@ -992,9 +1033,6 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-      }
-      .testimonial-card.t-dup {
-        display: none;
       }
       .testimonial-card:hover {
         border-color: var(--gold);
@@ -1047,6 +1085,14 @@
         text-transform: uppercase;
         color: var(--muted);
         margin-top: 3px;
+      }
+      @keyframes testimonialMarquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
       }
 
       /* ─── BRANCHES ─── */
@@ -1755,8 +1801,11 @@
           gap: 48px;
         }
         .testimonial-cards {
-          grid-template-columns: 1fr 1fr;
           gap: 18px;
+        }
+        .testimonial-card {
+          flex: 0 0 320px;
+          max-width: 320px;
         }
 
         .drone {
@@ -1860,9 +1909,9 @@
           gap: 56px;
         }
 
-        .testimonial-cards {
-          max-width: 640px;
-          margin: 0 auto;
+        .testimonial-card {
+          flex: 0 0 340px;
+          max-width: 340px;
         }
 
         .branches {
@@ -2128,31 +2177,15 @@
           width: max-content;
           gap: 16px;
           padding: 0 24px;
-          animation: testimonialMobileMarquee 26s linear infinite;
-        }
-        .testimonial-cards:hover,
-        .testimonial-cards:active {
-          animation-play-state: paused;
         }
         .testimonial-card {
           flex: 0 0 300px;
           min-height: 340px;
           padding: 34px 26px;
         }
-        .testimonial-card.t-dup {
-          display: flex;
-        }
         .testimonial-text {
           font-size: 18px;
           line-height: 1.65;
-        }
-        @keyframes testimonialMobileMarquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-50% - 8px));
-          }
         }
 
         .branches {
@@ -2556,49 +2589,49 @@
       </div>
       <div class="portfolio-masonry">
         <div class="p-item p-item-1">
-          <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7" />
+          <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Temple Portraits</span>
           </div>
         </div>
         <div class="p-item p-item-2">
-          <img src="assets/Gallery/TO WEB/(1).webp" alt="Portfolio 1" />
+          <img src="assets/Gallery/TO WEB/(1).webp" alt="Portfolio 1" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Bridal Portraits</span>
           </div>
         </div>
         <div class="p-item p-item-3">
-          <img src="assets/Gallery/TO WEB/(4).webp" alt="Portfolio 4" />
+          <img src="assets/Gallery/TO WEB/(4).webp" alt="Portfolio 4" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Nature Editorial</span>
           </div>
         </div>
         <div class="p-item p-item-4">
-          <img src="assets/Gallery/TO WEB/(3).webp" alt="Portfolio 3" />
+          <img src="assets/Gallery/TO WEB/(3).webp" alt="Portfolio 3" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Fashion Week</span>
           </div>
         </div>
         <div class="p-item p-item-5">
-          <img src="assets/Gallery/TO WEB/(5).webp" alt="Portfolio 5" />
+          <img src="assets/Gallery/TO WEB/(5).webp" alt="Portfolio 5" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">City Frames</span>
           </div>
         </div>
         <div class="p-item p-item-6">
-          <img src="assets/Gallery/TO WEB/(6).webp" alt="Portfolio 6" />
+          <img src="assets/Gallery/TO WEB/(6).webp" alt="Portfolio 6" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Siblings Shoots</span>
           </div>
         </div>
         <div class="p-item p-item-7">
-          <img src="assets/Gallery/TO WEB/(2).webp" alt="Portfolio 2" />
+          <img src="assets/Gallery/TO WEB/(2).webp" alt="Portfolio 2" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Couple Session</span>
           </div>
         </div>
         <div class="p-item p-item-8">
-          <img src="assets/Gallery/TO WEB/(8).webp" alt="Portfolio 8" />
+          <img src="assets/Gallery/TO WEB/(8).webp" alt="Portfolio 8" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Wedding Day</span>
           </div>
@@ -2606,49 +2639,49 @@
 
         <!-- MOBILE MARQUEE DUPLICATES -->
         <div class="p-item p-item-1 m-dup">
-          <img src="assets/Gallery/TO WEB/(1).webp" alt="Portfolio 1" />
+          <img src="assets/Gallery/TO WEB/(1).webp" alt="Portfolio 1" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Bridal Portraits</span>
           </div>
         </div>
         <div class="p-item p-item-2 m-dup">
-          <img src="assets/Gallery/TO WEB/(2).webp" alt="Portfolio 2" />
+          <img src="assets/Gallery/TO WEB/(2).webp" alt="Portfolio 2" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Executive Series</span>
           </div>
         </div>
         <div class="p-item p-item-3 m-dup">
-          <img src="assets/Gallery/TO WEB/(3).webp" alt="Portfolio 3" />
+          <img src="assets/Gallery/TO WEB/(3).webp" alt="Portfolio 3" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Nature Editorial</span>
           </div>
         </div>
         <div class="p-item p-item-4 m-dup">
-          <img src="assets/Gallery/TO WEB/(4).webp" alt="Portfolio 4" />
+          <img src="assets/Gallery/TO WEB/(4).webp" alt="Portfolio 4" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Fashion Week</span>
           </div>
         </div>
         <div class="p-item p-item-5 m-dup">
-          <img src="assets/Gallery/TO WEB/(5).webp" alt="Portfolio 5" />
+          <img src="assets/Gallery/TO WEB/(5).webp" alt="Portfolio 5" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Wedding Day</span>
           </div>
         </div>
         <div class="p-item p-item-6 m-dup">
-          <img src="assets/Gallery/TO WEB/(6).webp" alt="Portfolio 6" />
+          <img src="assets/Gallery/TO WEB/(6).webp" alt="Portfolio 6" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Couple Session</span>
           </div>
         </div>
         <div class="p-item p-item-7 m-dup">
-          <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7" />
+          <img src="assets/Gallery/TO WEB/(7).JPG" alt="Portfolio 7" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">Temple Portraits</span>
           </div>
         </div>
         <div class="p-item p-item-8 m-dup">
-          <img src="assets/Gallery/TO WEB/(8).webp" alt="Portfolio 8" />
+          <img src="assets/Gallery/TO WEB/(8).webp" alt="Portfolio 8" loading="lazy" decoding="async" />
           <div class="p-item-overlay">
             <span class="p-item-label">City Frames</span>
           </div>
@@ -2814,97 +2847,163 @@
         </div>
         <h2 class="section-title reveal">Words from our <em>clients</em></h2>
       </div>
-      <div class="testimonial-cards">
+      <div class="testimonial-marquee">
+      <div class="testimonial-cards" id="testimonialCards">
         <div class="testimonial-card reveal">
           <div class="testimonial-quote">"</div>
           <p class="testimonial-text">
-            Every image POORVI delivered felt like a painting. They didn't just
-            photograph our wedding — they told our entire love story in light.
+            Perfect photographer for all our events. Highly recommended. Thank
+            you so much, brother. The outputs are really awesome.
           </p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">M</div>
+            <div class="testimonial-avatar">N</div>
             <div>
-              <div class="testimonial-name">Madhan</div>
-              <div class="testimonial-event">Wedding Photography</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">
-            Our rebrand needed images that commanded respect. The corporate
-            portrait series POORVI produced elevated our entire visual identity
-            overnight.
-          </p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
-            <div>
-              <div class="testimonial-name">Aswin Senthilkumar</div>
-              <div class="testimonial-event">Maganize Designer</div>
+              <div class="testimonial-name">Naveen S</div>
+              <div class="testimonial-event">Google Review</div>
             </div>
           </div>
         </div>
         <div class="testimonial-card reveal">
           <div class="testimonial-quote">"</div>
           <p class="testimonial-text">
-            Working with POORVI was effortless and inspiring. They brought a
-            rare vision to our editorial campaign that no one else could have
-            imagined.
+            Super work in photographs and videos with good response and
+            approach. Very supportive team and a smooth overall experience.
           </p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
+            <div class="testimonial-avatar">த</div>
             <div>
-              <div class="testimonial-name">Arun Sanjeev M S</div>
-              <div class="testimonial-event">CEO, Trio's Park</div>
+              <div class="testimonial-name">தங்கவேல் சுப்ரமணியம்</div>
+              <div class="testimonial-event">Google Review</div>
             </div>
           </div>
         </div>
-        <div class="testimonial-card t-dup" aria-hidden="true">
+        <div class="testimonial-card reveal">
           <div class="testimonial-quote">"</div>
           <p class="testimonial-text">
-            Every image POORVI delivered felt like a painting. They didn't just
-            photograph our wedding — they told our entire love story in light.
+            Nice calm person. Good service done by him. The shoot was
+            comfortable and the final delivery quality was excellent.
           </p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
+            <div class="testimonial-avatar">K</div>
             <div>
-              <div class="testimonial-name">Amara & Daniel Singh</div>
-              <div class="testimonial-event">Wedding Photography</div>
+              <div class="testimonial-name">Karthik</div>
+              <div class="testimonial-event">Google Review</div>
             </div>
           </div>
         </div>
-        <div class="testimonial-card t-dup" aria-hidden="true">
+        <div class="testimonial-card reveal">
           <div class="testimonial-quote">"</div>
           <p class="testimonial-text">
-            Our rebrand needed images that commanded respect. The corporate
-            portrait series POORVI produced elevated our entire visual identity
-            overnight.
+            Best photographer and best wedding and outdoor photographer.
+            Reliable, professional, and consistently high quality work.
           </p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">C</div>
+            <div class="testimonial-avatar">S</div>
             <div>
-              <div class="testimonial-name">Catherine Moore</div>
-              <div class="testimonial-event">CEO, Axon Capital</div>
+              <div class="testimonial-name">Shankar Guna</div>
+              <div class="testimonial-event">Google Review</div>
             </div>
           </div>
         </div>
-        <div class="testimonial-card t-dup" aria-hidden="true">
+        <div class="testimonial-card reveal">
           <div class="testimonial-quote">"</div>
           <p class="testimonial-text">
-            Working with POORVI was effortless and inspiring. They brought a
-            rare vision to our editorial campaign that no one else could have
-            imagined.
+            All-time fabulous work. Great creativity, friendly approach, and
+            beautiful output quality for every session.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">L</div>
+            <div>
+              <div class="testimonial-name">LAKSH HANS</div>
+              <div class="testimonial-event">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Excellent responsiveness, quality, professionalism, and value.
+            Truly dependable service from start to final delivery.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
+            <div>
+              <div class="testimonial-name">Judo Mani</div>
+              <div class="testimonial-event">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Nice and clean output every time. Very friendly coordination,
+            punctual delivery, and excellent visual quality.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">K</div>
+            <div>
+              <div class="testimonial-name">KARTHIK M</div>
+              <div class="testimonial-event">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Professional work with a positive attitude throughout the shoot.
+            Great response, great finishing, and great value.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">V</div>
+            <div>
+              <div class="testimonial-name">venkat venki</div>
+              <div class="testimonial-event">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Great coverage and quality edits. The team captured every important
+            moment and delivered beautifully polished photos.
           </p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">R</div>
             <div>
-              <div class="testimonial-name">Ravi Krishnamurthy</div>
-              <div class="testimonial-event">
-                Creative Director, Vantage Magazine
-              </div>
+              <div class="testimonial-name">Ranjith R</div>
+              <div class="testimonial-event">Google Review</div>
             </div>
           </div>
         </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Consistent quality and creative framing. Highly reliable for
+            weddings, portraits, and outdoor sessions.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Abishek ibA</div>
+              <div class="testimonial-event">Google Review</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Excellent service mindset and smooth communication from booking to
+            final delivery. Truly satisfying experience.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">R</div>
+            <div>
+              <div class="testimonial-name">Rajiv Harini</div>
+              <div class="testimonial-event">Google Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -3336,8 +3435,31 @@
             weddings, and editorial campaigns since 2012.
           </p>
           <div class="footer-social">
-            <a href="#" class="social-link">insta</a>
-            <a href="#" class="social-link">map</a>
+            <a
+              href="https://www.instagram.com/poorviphotography/"
+              class="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                <circle cx="12" cy="12" r="5"></circle>
+                <circle cx="17.5" cy="6.5" r="1"></circle>
+              </svg>
+            </a>
+            <a
+              href="https://maps.google.com/?q=Ettukaiamman+Complex,+Keerambur,+Tamil+Nadu+637207"
+              class="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Google Maps"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </a>
           </div>
         </div>
         <div>
@@ -3459,6 +3581,20 @@
           this.classList.add("active");
         });
       });
+
+      // Testimonial marquee loop (clone once for seamless infinite scroll)
+      const testimonialCards = document.getElementById("testimonialCards");
+      if (testimonialCards && !testimonialCards.dataset.cloned) {
+        const originals = Array.from(testimonialCards.children);
+        originals.forEach((card) => {
+          const clone = card.cloneNode(true);
+          clone.classList.remove("reveal");
+          clone.classList.add("visible");
+          clone.setAttribute("aria-hidden", "true");
+          testimonialCards.appendChild(clone);
+        });
+        testimonialCards.dataset.cloned = "true";
+      }
 
       // Hamburger mobile menu
       const navToggle = document.getElementById("navToggle");
