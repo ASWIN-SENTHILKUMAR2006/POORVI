@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>POORVI — Photography Studio</title>
+    <title>POORVI | Photography Studio</title>
     <meta
       name="description"
       content="POORVI Photography Studio captures timeless wedding, portrait, corporate, editorial, and event moments in Namakkal and Keerambur, Tamil Nadu."
@@ -34,6 +34,8 @@
       content="Book POORVI Photography Studio for wedding, portrait, and event photography in Tamil Nadu."
     />
     <meta name="twitter:image" content="https://poorvi.triospark.in/assets/logo.png" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1317,6 +1319,57 @@
         transform: translateY(-2px);
       }
 
+      .toast-stack {
+        position: fixed;
+        top: 96px;
+        right: 28px;
+        z-index: 1200;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        pointer-events: none;
+      }
+      .toast {
+        min-width: 280px;
+        max-width: min(420px, calc(100vw - 40px));
+        background: rgba(14, 14, 12, 0.96);
+        border: 1px solid var(--border);
+        color: var(--cream);
+        padding: 14px 16px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(10px);
+        transform: translateY(-12px);
+        opacity: 0;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .toast.success {
+        border-color: rgba(92, 184, 92, 0.45);
+      }
+      .toast.error {
+        border-color: rgba(214, 70, 70, 0.5);
+      }
+      .toast-title {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      .toast-message {
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--cream);
+        font-weight: 300;
+      }
+
       /* ─── INSTAGRAM FEED ─── */
       .instagram-feed {
         padding: 120px 80px;
@@ -1371,6 +1424,7 @@
         position: absolute;
         inset: 0;
         background: rgba(14, 14, 12, 0.6);
+        color: var(--gold);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1383,7 +1437,7 @@
       .insta-item-overlay svg {
         width: 28px;
         height: 28px;
-        fill: var(--cream);
+        fill: none;
         opacity: 0.9;
       }
       .instagram-cta {
@@ -1532,6 +1586,14 @@
         color: var(--muted);
         font-weight: 300;
         letter-spacing: 0.1em;
+      }
+      .footer-copy a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-copy a:hover {
+        color: var(--cream);
       }
       .footer-copy span {
         color: var(--gold);
@@ -2212,6 +2274,16 @@
         }
         .form-submit {
           width: 100%;
+        }
+        .toast-stack {
+          left: 16px;
+          right: 16px;
+          top: auto;
+          bottom: 16px;
+        }
+        .toast {
+          min-width: 100%;
+          max-width: 100%;
         }
 
         .instagram-feed {
@@ -3028,8 +3100,8 @@
         <div class="branch-card reveal">
           <div class="branch-image">
             <img
-              src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=85"
-              alt="Namakkal"
+              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=85"
+              alt="Namakkal studio office interior"
             />
           </div>
           <div class="branch-info">
@@ -3051,8 +3123,8 @@
         <div class="branch-card reveal">
           <div class="branch-image">
             <img
-              src="https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?w=800&q=85"
-              alt="Karnataka Studio"
+              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=85"
+              alt="Keerambur studio office interior"
             />
           </div>
           <div class="branch-info">
@@ -3097,17 +3169,18 @@
             </li>
             <li>
               <div class="contact-info-icon">&#9873;</div>
-              <div>ETTUKAIAMMAN COMPLEX, Keerambur, Tamil Nadu 637207</div>
+              <div>Ettukkaiamman Complex, Keerambur, Tamil Nadu 637207</div>
             </li>
           </ul>
         </div>
-        <form class="contact-form reveal" onsubmit="event.preventDefault()">
+        <form class="contact-form reveal" id="contactForm" method="post" action="mail.php">
           <div class="form-row">
             <div class="form-group">
               <label for="cf-name">Full Name</label>
               <input
                 type="text"
                 id="cf-name"
+                name="name"
                 placeholder="Your name"
                 required
               />
@@ -3117,6 +3190,7 @@
               <input
                 type="email"
                 id="cf-email"
+                name="email"
                 placeholder="you@email.com"
                 required
               />
@@ -3125,7 +3199,7 @@
           <div class="form-row">
             <div class="form-group">
               <label for="cf-type">Session Type</label>
-              <select id="cf-type">
+              <select id="cf-type" name="session_type">
                 <option value="" disabled selected>Select a service</option>
                 <option>Wedding Photography</option>
                 <option>Corporate Portraits</option>
@@ -3137,13 +3211,14 @@
             </div>
             <div class="form-group">
               <label for="cf-date">Preferred Date</label>
-              <input type="date" id="cf-date" />
+              <input type="date" id="cf-date" name="preferred_date" />
             </div>
           </div>
           <div class="form-group">
             <label for="cf-message">Your Message</label>
             <textarea
               id="cf-message"
+              name="message"
               placeholder="Tell us about your vision, event details, or any questions you have..."
             ></textarea>
           </div>
@@ -3192,200 +3267,104 @@
       </div>
       <div class="instagram-grid">
         <a
-          href="https://www.instagram.com/poorviphotography/"
+          href="https://www.instagram.com/p/DVLNre7D22n/"
           target="_blank"
           rel="noopener noreferrer"
           class="insta-item reveal"
         >
           <img
-            src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80"
+            src="assets/instagram/1.jpg"
             alt="Instagram post"
           />
           <div class="insta-item-overlay">
             <svg viewBox="0 0 24 24">
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
             </svg>
           </div>
         </a>
         <a
-          href="https://www.instagram.com/poorviphotography/"
+          href="https://www.instagram.com/p/DUmPqsuDzgB/"
           target="_blank"
           rel="noopener noreferrer"
           class="insta-item reveal"
         >
           <img
-            src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80"
+            src="assets/instagram/2.jpg"
             alt="Instagram post"
           />
           <div class="insta-item-overlay">
             <svg viewBox="0 0 24 24">
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
             </svg>
           </div>
         </a>
         <a
-          href="https://www.instagram.com/poorviphotography/"
+          href="https://www.instagram.com/p/DQx2I4Cj_Pf/"
           target="_blank"
           rel="noopener noreferrer"
           class="insta-item reveal"
         >
           <img
-            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80"
+            src="assets/instagram/3.jpg"
             alt="Instagram post"
           />
           <div class="insta-item-overlay">
             <svg viewBox="0 0 24 24">
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
             </svg>
           </div>
         </a>
         <a
-          href="https://www.instagram.com/poorviphotography/"
+          href="https://www.instagram.com/p/DQv_9hXj99Q/"
           target="_blank"
           rel="noopener noreferrer"
           class="insta-item reveal"
         >
           <img
-            src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&q=80"
+            src="assets/instagram/4.jpg"
             alt="Instagram post"
           />
           <div class="insta-item-overlay">
             <svg viewBox="0 0 24 24">
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
             </svg>
           </div>
         </a>
         <a
-          href="https://www.instagram.com/poorviphotography/"
+          href="https://www.instagram.com/p/DQde897jHkK/"
           target="_blank"
           rel="noopener noreferrer"
           class="insta-item reveal"
         >
           <img
-            src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=600&q=80"
+            src="assets/instagram/5.jpg"
             alt="Instagram post"
           />
           <div class="insta-item-overlay">
             <svg viewBox="0 0 24 24">
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
             </svg>
           </div>
         </a>
         <a
-          href="https://www.instagram.com/poorviphotography/"
+          href="https://www.instagram.com/p/DQcLMr_DyuC/"
           target="_blank"
           rel="noopener noreferrer"
           class="insta-item reveal"
         >
           <img
-            src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=600&q=80"
+            src="assets/instagram/6.jpg"
             alt="Instagram post"
           />
           <div class="insta-item-overlay">
             <svg viewBox="0 0 24 24">
-              <rect
-                x="2"
-                y="2"
-                width="20"
-                height="20"
-                rx="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
             </svg>
           </div>
         </a>
@@ -3487,10 +3466,10 @@
         <div>
           <div class="footer-col-title">Contact</div>
           <ul class="footer-links">
-            <li><a href="#">hello@poorvistudio.com</a></li>
-            <li><a href="#">+1 (212) 555-0197</a></li>
+            <li><a href="mailto:poorviphotography@gmail.com">poorviphotography@gmail.com</a></li>
+            <li><a href="tel:+918122448813">+91 81224 48813</a></li>
             <li>
-              <a href="#">148 W 37th Street<br />New York, NY 10018</a>
+              <a href="https://maps.google.com/?q=Ettukkaiamman+Complex,+Keerambur,+Tamil+Nadu+637207" target="_blank" rel="noopener noreferrer">Ettukkaiamman Complex, Keerambur, Tamil Nadu 637207</a>
             </li>
             <li style="margin-top: 20px"><a href="#">Book a Session →</a></li>
           </ul>
@@ -3500,7 +3479,10 @@
         <div class="footer-copy">
           © 2025 <span>POORVI Photography Studio</span>. All rights reserved.
         </div>
-        <div class="footer-copy">Privacy Policy &nbsp;·&nbsp; Terms of Use</div>
+        <div class="footer-copy">
+          <a href="privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+          <a href="terms-of-use.html">Terms of Use</a>
+        </div>
       </div>
     </footer>
 
@@ -3611,6 +3593,183 @@
           mobileMenu.classList.remove("open"),
         );
       });
+
+      // Contact form submit + themed toast notifications
+      const contactForm = document.getElementById("contactForm");
+      const toastStack = document.createElement("div");
+      toastStack.className = "toast-stack";
+      document.body.appendChild(toastStack);
+
+      function showToast(type, message) {
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+          <div class="toast-title">${type === "success" ? "Message Sent" : "Submission Failed"}</div>
+          <div class="toast-message">${message}</div>
+        `;
+        toastStack.appendChild(toast);
+
+        requestAnimationFrame(() => toast.classList.add("show"));
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => toast.remove(), 320);
+        }, 3800);
+      }
+
+      if (contactForm) {
+        const submitBtn = contactForm.querySelector(".form-submit");
+        const defaultBtnText = submitBtn ? submitBtn.textContent : "Send Message";
+
+        contactForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+            submitBtn.style.opacity = "0.7";
+          }
+
+          const formData = new FormData(contactForm);
+
+          try {
+            const response = await fetch("mail.php", {
+              method: "POST",
+              body: formData,
+              headers: {
+                Accept: "application/json",
+              },
+            });
+
+            const raw = await response.text();
+            let result = {};
+            try {
+              result = JSON.parse(raw);
+            } catch {
+              result = { ok: false, message: "Unexpected server response. Please try again." };
+            }
+
+            if (!response.ok || !result.ok) {
+              throw new Error(result.message || "Unable to submit the form right now.");
+            }
+
+            contactForm.reset();
+            showToast("success", result.message || "Thanks! We will contact you soon.");
+          } catch (error) {
+            showToast("error", error.message || "Something went wrong. Please try again.");
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = defaultBtnText;
+              submitBtn.style.opacity = "1";
+            }
+          }
+        });
+      }
+
+      // Fetch dynamic Instagram posts via PHP backend
+      async function fetchInstagramFeed() {
+        const grid = document.querySelector('.instagram-grid');
+        if (!grid) return;
+
+        const imageLoads = (url, timeoutMs = 7000) =>
+          new Promise((resolve) => {
+            const img = new Image();
+            let done = false;
+            const timer = setTimeout(() => {
+              if (!done) {
+                done = true;
+                resolve(false);
+              }
+            }, timeoutMs);
+
+            img.onload = () => {
+              if (!done) {
+                done = true;
+                clearTimeout(timer);
+                resolve(true);
+              }
+            };
+            img.onerror = () => {
+              if (!done) {
+                done = true;
+                clearTimeout(timer);
+                resolve(false);
+              }
+            };
+
+            img.referrerPolicy = 'no-referrer';
+            img.src = url;
+          });
+
+        try {
+          const response = await fetch('instagram_feed.php', {
+            headers: { Accept: 'application/json' },
+            cache: 'no-store',
+          });
+
+          if (!response.ok) {
+            throw new Error('Instagram endpoint failed with status ' + response.status);
+          }
+
+          const raw = await response.text();
+          const result = JSON.parse(raw);
+          
+          if (result.success && result.data && result.data.length > 0) {
+            const sanitizedPosts = result.data
+              .filter((post) => post && typeof post.link === 'string' && typeof post.image === 'string')
+              .slice(0, 6);
+
+            const checks = await Promise.all(
+              sanitizedPosts.map(async (post) => ({
+                post,
+                ok: await imageLoads(post.image),
+              })),
+            );
+
+            const validPosts = checks.filter((item) => item.ok).map((item) => item.post);
+
+            // Keep static fallback posts when remote images are blocked/expired.
+            if (validPosts.length > 0) {
+              const fragment = document.createDocumentFragment();
+
+              validPosts.forEach((post) => {
+                const anchor = document.createElement('a');
+                anchor.href = post.link;
+                anchor.target = '_blank';
+                anchor.rel = 'noopener noreferrer';
+                anchor.className = 'insta-item reveal visible';
+
+                const image = document.createElement('img');
+                image.src = post.image;
+                image.alt = 'Instagram post';
+                image.loading = 'lazy';
+                image.referrerPolicy = 'no-referrer';
+
+                const overlay = document.createElement('div');
+                overlay.className = 'insta-item-overlay';
+                overlay.innerHTML = `
+                  <svg viewBox="0 0 24 24">
+                    <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+                    <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  </svg>
+                `;
+
+                anchor.appendChild(image);
+                anchor.appendChild(overlay);
+                fragment.appendChild(anchor);
+              });
+
+              grid.innerHTML = '';
+              grid.appendChild(fragment);
+            }
+          }
+        } catch (error) {
+          console.error('Failed to load dynamic Instagram feed. Keeping fallback assets.', error);
+        }
+      }
+
+      window.addEventListener('load', fetchInstagramFeed);
     </script>
   </body>
 </html>
