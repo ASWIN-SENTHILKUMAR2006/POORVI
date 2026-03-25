@@ -34,8 +34,8 @@
       content="Book POORVI Photography Studio for wedding, portrait, and event photography in Tamil Nadu."
     />
     <meta name="twitter:image" content="https://poorvi.triospark.in/assets/logo.png" />
-    <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2415,7 +2415,7 @@
         />
         <div class="hero-right-overlay"></div>
         <div class="hero-counter">
-          <div class="hero-counter-num">840+</div>
+          <div class="hero-counter-num">1000+</div>
           <div class="hero-counter-label">Sessions delivered</div>
         </div>
       </div>
@@ -2472,16 +2472,16 @@
         </p>
         <div class="stats-row reveal">
           <div class="stat-item">
-            <div class="stat-num">840+</div>
+            <div class="stat-num">1000+</div>
             <div class="stat-label">Sessions</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">14</div>
-            <div class="stat-label">Awards</div>
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Categories</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">32</div>
-            <div class="stat-label">Countries</div>
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Years</div>
           </div>
         </div>
       </div>
@@ -2894,15 +2894,15 @@
           </p>
           <div class="founder-stats reveal">
             <div class="stat-item">
-              <div class="stat-num">840+</div>
+              <div class="stat-num">1000+</div>
               <div class="stat-label">Sessions</div>
             </div>
             <div class="stat-item">
-              <div class="stat-num">14</div>
-              <div class="stat-label">Awards</div>
+              <div class="stat-num">20+</div>
+              <div class="stat-label">Categories</div>
             </div>
             <div class="stat-item">
-              <div class="stat-num">12+</div>
+              <div class="stat-num">10+</div>
               <div class="stat-label">Years</div>
             </div>
           </div>
@@ -3105,8 +3105,8 @@
             />
           </div>
           <div class="branch-info">
-            <div class="branch-city">Tamil Nadu</div>
-            <div class="branch-address">Namakkal <br /></div>
+            <div class="branch-city">Namakkal City</div>
+            <div class="branch-address">Tamil Nadu<br /></div>
             <div class="branch-details">
               <div class="branch-detail-item">
                 <div class="branch-detail-label">Phone</div>
@@ -3128,8 +3128,8 @@
             />
           </div>
           <div class="branch-info">
-            <div class="branch-city">Tamil Nadu</div>
-            <div class="branch-address">Keerambur<br /></div>
+            <div class="branch-city">Keerambur</div>
+            <div class="branch-address">Tamil Nadu<br /></div>
             <div class="branch-details">
               <div class="branch-detail-item">
                 <div class="branch-detail-label">Phone</div>
